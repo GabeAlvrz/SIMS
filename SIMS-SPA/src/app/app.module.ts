@@ -17,8 +17,6 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { MemberListComponent } from './members/member-list/member-list.component';
-import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
@@ -29,6 +27,8 @@ import { MemberListResolver } from './_resolver/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { ExitsurveysComponent } from './exitsurveys/exitsurveys.component';
+import { GradseniorsurveysComponent } from './gradseniorsurveys/gradseniorsurveys.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -41,11 +41,11 @@ export function tokenGetter() {
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
-      ListsComponent,
-      MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      ExitsurveysComponent,
+      GradseniorsurveysComponent
    ],
    imports: [
       BrowserModule,
