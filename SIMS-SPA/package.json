@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "@auth0/angular-jwt": "^2.1.0",
+    "@types/knockout": "^3.4.63",
     "alertifyjs": "^1.11.2",
     "bootstrap": "^4.2.1",
     "bootswatch": "^4.1.1",
@@ -28,6 +29,8 @@
     "ngx-bootstrap": "^3.0.1",
     "ngx-gallery": "^5.3.2",
     "rxjs": "~6.3.3",
+    "survey-angular": "^1.0.71",
+    "surveyjs-widgets": "^1.0.71",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

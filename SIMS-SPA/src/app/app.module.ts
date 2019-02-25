@@ -29,6 +29,8 @@ import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ExitsurveysComponent } from './exitsurveys/exitsurveys.component';
 import { GradseniorsurveysComponent } from './gradseniorsurveys/gradseniorsurveys.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
+import { ThesisprojectComponent } from './thesisproject/thesisproject.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -45,7 +47,9 @@ export function tokenGetter() {
       MemberDetailComponent,
       MemberEditComponent,
       ExitsurveysComponent,
-      GradseniorsurveysComponent
+      GradseniorsurveysComponent,
+      MainpageComponent,
+      ThesisprojectComponent
    ],
    imports: [
       BrowserModule,
