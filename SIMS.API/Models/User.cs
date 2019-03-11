@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace SIMS.API.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
         // working
-        public int Id { get; set; }
-        public string Username { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Level { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
@@ -25,6 +22,7 @@ namespace SIMS.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
 
 
         
@@ -32,7 +30,6 @@ namespace SIMS.API.Models
         public string CurrentProgram { get; set; }
 
         public string CurrentAcademicLevel { get; set; }
-        public string Email { get; set; }
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
 

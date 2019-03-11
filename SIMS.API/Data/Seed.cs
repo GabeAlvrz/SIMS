@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using SIMS.API.Models;
 
@@ -6,35 +8,52 @@ namespace SIMS.API.Data
 {
     public class Seed
     {
-        private readonly DataContext context;
-
-        public Seed(DataContext context)
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
+        public Seed(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
-            this.context = context;
+            this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         public void SeedUsers()
         {
-            var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
-            var users = JsonConvert.DeserializeObject<List<User>>(userData);
-            foreach (var user in users)
+            if (!this.userManager.Users.Any())
             {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash("password", out passwordHash, out passwordSalt);
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-                user.Username = user.Username.ToLower();
-                this.context.Users.Add(user);
-            }
-            this.context.SaveChanges();
-        }
+                var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+                var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var roles = new List<Role>
+                {
+                    new Role{Name = "Member"},
+                    new Role{Name = "Admin"},
+                    new Role{Name = "Moderator"},
+                    new Role{Name = "VIP"}
+                };
+
+                foreach (var role in roles)
+                {
+                    this.roleManager.CreateAsync(role).Wait();
+                }
+
+                foreach (var user in users)
+                {
+                    this.userManager.CreateAsync(user, "password").Wait();
+                    this.userManager.AddToRoleAsync(user, "Member").Wait();
+                }
+
+                var adminUser = new User
+                {
+                    UserName = "Admin"
+                };
+
+                IdentityResult result = this.userManager.CreateAsync(adminUser, "password").Result;
+
+                if (result.Succeeded)
+                {
+                    var admin = this.userManager.FindByNameAsync("admin").Result;
+                    this.userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"}).Wait();
+                }
             }
         }
     }

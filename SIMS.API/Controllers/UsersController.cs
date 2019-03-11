@@ -11,7 +11,6 @@ using SIMS.API.Helpers;
 
 namespace SIMS.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
