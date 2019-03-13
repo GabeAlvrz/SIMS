@@ -12,6 +12,7 @@ import { ExitsurveysComponent } from './exitsurveys/exitsurveys.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { GradseniorsurveysComponent } from './gradseniorsurveys/gradseniorsurveys.component';
 import { ThesisprojectComponent } from './thesisproject/thesisproject.component';
+import { RegisterComponent } from './register/register.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
@@ -29,6 +30,7 @@ export const appRoutes: Routes = [
             { path : 'exitsurveys', component: ExitsurveysComponent },
             { path : 'gradseniorsurveys', component: GradseniorsurveysComponent },
             { path : 'thesisproject', component: ThesisprojectComponent },
+            { path : 'register', component: RegisterComponent },
             { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },
