@@ -86,6 +86,8 @@ namespace SIMS.API
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<ISimsRepository, SimsRepository>();
+            services.AddScoped<IExitSurveyRepository, ExitSurveyRepository>();
+            services.AddScoped<IGradSeniorSurveyRepository, GradSeniorSurveyRepository>();
             
         }
 
