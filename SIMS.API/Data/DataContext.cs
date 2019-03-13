@@ -11,6 +11,8 @@ namespace SIMS.API.Data
         public DataContext(DbContextOptions<DataContext> options) : base (options) {}
         public DbSet<Value> Values { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<ExitSurvey> ExitSurveys { get; set; }
+        public DbSet<GradSeniorSurvey> GradSeniorSurveys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
