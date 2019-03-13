@@ -65,6 +65,7 @@ export class RegisterComponent implements OnInit {
 
   cancel() {
     this.cancelRegister.emit(false);
+    this.router.navigate(['/mainpage']);
     this.alertify.message('Cancelled');
   }
 
