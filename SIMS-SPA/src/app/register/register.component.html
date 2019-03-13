@@ -1,10 +1,11 @@
+<div class="container">
 <form [formGroup]="registerForm" (ngSubmit)="register()">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
   
     <div class="form-group">
       <input [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}" 
-      type="text" class="form-control" formControlName="username" placeholder="Username">
+      type="text" class="form-control" formControlName="username" placeholder="Username or ID">
       <div class="invalid-feedback">Please enter a username</div>
     </div>
 
@@ -90,6 +91,6 @@
     </div>
     
   </form>
-
+</div>
   <!-- <p>Form value: {{registerForm.value | json}}</p>
   <p>Form status: {{registerForm.status | json}}</p> -->
