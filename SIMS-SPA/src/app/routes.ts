@@ -12,6 +12,7 @@ import { ExitsurveysComponent } from './exitsurveys/exitsurveys.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { GradseniorsurveysComponent } from './gradseniorsurveys/gradseniorsurveys.component';
 import { ThesisprojectComponent } from './thesisproject/thesisproject.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     { path : '', component: HomeComponent },
@@ -27,7 +28,8 @@ export const appRoutes: Routes = [
                                     canDeactivate: [PreventUnsavedChanges]},
             { path : 'exitsurveys', component: ExitsurveysComponent },
             { path : 'gradseniorsurveys', component: GradseniorsurveysComponent },
-            { path : 'thesisproject', component: ThesisprojectComponent }
+            { path : 'thesisproject', component: ThesisprojectComponent },
+            { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },
     { path : '**', redirectTo: '', pathMatch: 'full' }
