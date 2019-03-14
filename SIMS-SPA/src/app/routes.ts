@@ -14,6 +14,8 @@ import { GradseniorsurveysComponent } from './gradseniorsurveys/gradseniorsurvey
 import { ThesisprojectComponent } from './thesisproject/thesisproject.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { ExitsurveysviewComponent } from './exitsurveysview/exitsurveysview.component';
+import { GradseniorsurveysviewComponent } from './gradseniorsurveysview/gradseniorsurveysview.component';
 
 export const appRoutes: Routes = [
     { path : '', component: HomeComponent },
@@ -31,7 +33,9 @@ export const appRoutes: Routes = [
             { path : 'gradseniorsurveys', component: GradseniorsurveysComponent },
             { path : 'thesisproject', component: ThesisprojectComponent },
             { path : 'register', component: RegisterComponent },
-            { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
+            { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
+            { path : 'exitsurveysview', component: ExitsurveysviewComponent },
+            { path : 'gradseniorsurveysview', component: GradseniorsurveysviewComponent },
         ]
     },
     { path : '**', redirectTo: '', pathMatch: 'full' }
