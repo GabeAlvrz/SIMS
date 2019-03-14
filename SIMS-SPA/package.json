@@ -21,6 +21,8 @@
     "@angular/router": "~7.1.0",
     "@auth0/angular-jwt": "^2.1.0",
     "@types/knockout": "^3.4.63",
+    "ag-grid-angular": "^20.1.0",
+    "ag-grid-community": "^20.1.0",
     "alertifyjs": "^1.11.2",
     "bootstrap": "^4.2.1",
     "bootswatch": "^4.1.1",
