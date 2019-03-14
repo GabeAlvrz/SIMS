@@ -37,6 +37,7 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { AgGridModule } from '../../node_modules/ag-grid-angular';
 import { ExitsurveysviewComponent } from './exitsurveysview/exitsurveysview.component';
 import { GradseniorsurveysviewComponent } from './gradseniorsurveysview/gradseniorsurveysview.component';
 
@@ -79,13 +80,15 @@ export function tokenGetter() {
       ButtonsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       ModalModule.forRoot(),
+      AgGridModule.withComponents(null),
       NgxGalleryModule,
-      JwtModule.forRoot(\\nconfig
-   ],
-   blacklistedRoutes: [
-      'localhost
-   ]
-})
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AuthService,
