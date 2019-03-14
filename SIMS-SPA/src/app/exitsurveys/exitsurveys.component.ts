@@ -99,40 +99,42 @@ export class ExitsurveysComponent implements OnInit {
             // isRequired: true
           },
           {
-            name: 'Personal Contact Information',
-            type: 'multipletext',
-            colCount: 2,
-            isRequired: true,
-            items: [
+            type: 'html',
+            html: '<h5>Personal Contact Information</h5>'
+          },
+          {
+            name: 'contact1Name',
+            type: 'text',
+            title: 'Name'
+          },
+          {
+            type: 'text',
+            name: 'contact1Address',
+            title: 'Address'
+          },
+          {
+            type: 'text',
+            name: 'contact1PhoneHome',
+            title: 'Home Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact1PhoneWork',
+            title: 'Work Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact1PhoneCell',
+            title: 'Cell Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact1Email',
+            title: 'Email',
+            validators: [
               {
-                name: 'contact1Name',
-                title: 'Name'
-              },
-              {
-                name: 'contact1Address',
-                title: 'Address'
-              },
-              {
-                name: 'contact1PhoneHome',
-                title: 'Home Phone'
-              },
-              {
-                name: 'contact1PhoneWork',
-                title: 'Work Phone'
-              },
-              {
-                name: 'contact1PhoneCell',
-                title: 'Cell Phone'
-              },
-              {
-                name: 'contact1Email',
-                title: 'Email',
-                validators: [
-                  {
-                      type: 'email'
-                  }
-                ]
-              },
+                  type: 'email'
+              }
             ]
           },
           {
@@ -149,35 +151,42 @@ export class ExitsurveysComponent implements OnInit {
             colCount: 4
           },
           {
-            name: 'Other Contact Information',
-            type: 'multipletext',
-            colCount: 2,
-            // isRequired: true,
-            items: [
+            type: 'html',
+            html: '<h5>Other Contact Information</h5>'
+          },
+          {
+            name: 'contact2Name',
+            type: 'text',
+            title: 'Name'
+          },
+          {
+            type: 'text',
+            name: 'contact2Address',
+            title: 'Address'
+          },
+          {
+            type: 'text',
+            name: 'contact2PhoneHome',
+            title: 'Home Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact2PhoneWork',
+            title: 'Work Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact2PhoneCell',
+            title: 'Cell Phone'
+          },
+          {
+            type: 'text',
+            name: 'contact2Email',
+            title: 'Email',
+            validators: [
               {
-                name: 'contact2Name',
-                title: 'Name'
-              },
-              {
-                name: 'contact2Address',
-                title: 'Address'
-              },
-              {
-                name: 'contactPhoneHome',
-                title: 'Home Phone'
-              },
-              {
-                name: 'contact2PhoneWork',
-                title: 'Work Phone'
-              },
-              {
-                name: 'contactPhoneCell',
-                title: 'Cell Phone'
-              },
-              {
-                name: 'contact2Email',
-                title: 'Email'
-              },
+                  type: 'email'
+              }
             ]
           },
           {
@@ -226,79 +235,81 @@ export class ExitsurveysComponent implements OnInit {
             type: 'comment'
           },
           {
-            name: 'Graduate School',
-            title: 'If you have decided to pursue a graduate or professional degree, please provide the following information:',
-            type: 'multipletext',
-            colCount: 2,
-            // isRequired: true,
-            items: [
-              {
-                name: 'furtherStudySchool',
-                title: 'School'
-              },
-              {
-                name: 'furtherStudyMajor',
-                title: 'Major'
-              },
-              {
-                name: 'furtherStudyScholarship',
-                title: 'Scholarship/Assistantship'
-              }
-            ]
+            type: 'html',
+            html: '<h5>If you have decided to pursue a graduate or professional degree, please provide the following information:</h5>'
           },
           {
-            name: 'job search',
-            title: 'If you have started searching for employment, please provide the following information',
-            type: 'multipletext',
-            items: [
-              {
-                name: 'jobSearchDuration',
-                title: 'Number of months searching:'
-              },
-              {
-                name: 'jobSearchNumInterview',
-                title: 'Number of interviews you had:'
-              },
-              {
-                name: 'jobSearchNumOffer',
-                title: 'Number of job offers obtained:'
-              },
-              {
-                name: 'jobSearchAvgSalary',
-                title: 'Average starting salary offered:'
-              }
-            ]
+            name: 'furtherStudySchool',
+            type: 'text',
+            title: 'School'
           },
           {
-            name: 'accepted offer',
-            title: 'If you have already accepted an offer, please provide the following information if possible',
-            type: 'multipletext',
-            items: [
-              {
-                name: 'jobCompany',
-                title: 'Company:'
-              },
-              {
-                name: 'jobCity',
-                title: 'City:'
-              },
-              {
-                name: 'jobTitle',
-                title: 'Position/Title:'
-              },
-              {
-                name: 'jobCompanyContact',
-                title: 'Your Company contact information (if available):'
-              },
-              {
-                name: 'jobCompanyWeb',
-                title: 'Web address:'
-              },
-              {
-                name: 'jobSalary',
-                title: 'Starting salary:'
-              }
-            ]
+            name: 'furtherStudyMajor',
+            type: 'text',
+            title: 'Major'
+          },
+          {
+            name: 'furtherStudyScholarship',
+            type: 'text',
+            title: 'Scholarship/Assistantship'
+          },
+          {
+            type: 'html',
+            html: '<h5>If you have started searching for employment, please provide the following information:</h5>'
+          },
+          {
+            type: 'text',
+            name: 'jobSearchDuration',
+            title: 'Number of months searching:'
+          },
+          {
+            type: 'text',
+            name: 'jobSearchNumInterview',
+            title: 'Number of interviews you had:'
+          },
+          {
+            type: 'text',
+            name: 'jobSearchNumOffer',
+            title: 'Number of job offers obtained:'
+          },
+          {
+            type: 'text',
+            name: 'jobSearchAvgSalary',
+            title: 'Average starting salary offered:'
+          },
+          {
+            type: 'html',
+            html: '<h5>If you have already accepted an offer, please provide the following information if possible:</h5>'
+          },
+          {
+            type: 'text',
+            name: 'jobCompany',
+            title: 'Company:'
+          },
+          {
+            type: 'text',
+            name: 'jobCity',
+            title: 'City:'
+          },
+          {
+            type: 'text',
+            name: 'jobTitle',
+            title: 'Position/Title:'
+          },
+          {
+            type: 'text',
+            name: 'jobCompanyContact',
+            title: 'Your Company contact information (if available):'
+          },
+          {
+            type: 'text',
+            name: 'jobCompanyWeb',
+            title: 'Web address:'
+          },
+          {
+            type: 'text',
+            name: 'jobSalary',
+            title: 'Starting salary:'
           },
          {
           type: 'radiogroup',
