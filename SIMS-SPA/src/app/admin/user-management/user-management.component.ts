@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/_services/admin.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-user-management',
@@ -35,7 +36,18 @@ export class UserManagementComponent implements OnInit {
       roles: this.getRolesArray(user)
     };
     this.bsModalRef = this.modalService.show(RolesModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
+    this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
+      const rolesToUpdate = {
+        roleNames: [...values.filter(el => el.checked === true).map(el => el.name)]
+      };
+      if (rolesToUpdate) {
+        this.adminService.updateUserRoles(user, rolesToUpdate).subscribe(() => {
+          user.roles = [...rolesToUpdate.roleNames];
+        }, error => {
+          this.alertify.error(error);
+        });
+      }
+    });
   }
 
   private getRolesArray(user) {
@@ -65,6 +77,10 @@ export class UserManagementComponent implements OnInit {
     }
 
     return roles;
+  }
+
+  deleteUser(user: User) {
+    // this.alertify.confirm("Are you sure you want to delete user " + user.userName, )
   }
 
 }

@@ -76,5 +76,17 @@ namespace SIMS.API.Controllers
         {
             return Ok("Admin or moderators can see this");
         }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("deleteUser")]
+        public async Task<IActionResult> deleteUser(UserForDeleteDto userForDeleteDto)
+        {
+            var user = await this.userManager.FindByNameAsync(userForDeleteDto.Username);
+            var result = await this.userManager.DeleteAsync(user);
+            if (!result.Succeeded) {
+                return BadRequest("User could not be deleted");
+            }
+            return Ok();
+        }
     }
 }
