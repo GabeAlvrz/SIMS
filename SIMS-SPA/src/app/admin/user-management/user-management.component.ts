@@ -55,9 +55,10 @@ export class UserManagementComponent implements OnInit {
     const userRoles = user.roles;
     const availableRoles: any[] = [
       {name: 'Admin', value: 'Admin'},
-      {name: 'Moderator', value: 'Moderator'},
-      {name: 'Member', value: 'Member'},
-      {name: 'Vip', value: 'Vip'},
+      {name: 'Staff', value: 'Staff'},
+      {name: 'Faculty', value: 'Faculty'},
+      {name: 'Advisor', value: 'Advisor'},
+      {name: 'Student', value: 'Student'}
     ];
 
     for (let i = 0; i < availableRoles.length; i++) {
@@ -80,7 +81,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    // this.alertify.confirm("Are you sure you want to delete user " + user.userName, )
+    this.alertify.confirm('Are you sure you want to delete this account: ' + user.userName, () => {
+      this.adminService.deleteUser(user).subscribe(() => {
+        this.alertify.success('User deleted');
+        this.getUsersWithRoles();
+      }, error => {
+        this.alertify.error(error);
+      });
+    });
   }
 
 }

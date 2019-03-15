@@ -33,7 +33,7 @@ export const appRoutes: Routes = [
             { path : 'gradseniorsurveys', component: GradseniorsurveysComponent },
             { path : 'thesisproject', component: ThesisprojectComponent },
             { path : 'register', component: RegisterComponent },
-            { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
+            { path : 'admin', component: AdminPanelComponent, data: {roles: ['Admin']}},
             { path : 'exitsurveysview', component: ExitsurveysviewComponent },
             { path : 'gradseniorsurveysview', component: GradseniorsurveysviewComponent },
         ]

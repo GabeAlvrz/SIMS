@@ -25,10 +25,11 @@ namespace SIMS.API.Data
 
                 var roles = new List<Role>
                 {
-                    new Role{Name = "Member"},
                     new Role{Name = "Admin"},
-                    new Role{Name = "Moderator"},
-                    new Role{Name = "VIP"}
+                    new Role{Name = "Staff"},
+                    new Role{Name = "Faculty"},
+                    new Role{Name = "Advisor"},
+                    new Role{Name = "Student"}
                 };
 
                 foreach (var role in roles)
@@ -39,7 +40,7 @@ namespace SIMS.API.Data
                 foreach (var user in users)
                 {
                     this.userManager.CreateAsync(user, "password").Wait();
-                    this.userManager.AddToRoleAsync(user, "Member").Wait();
+                    this.userManager.AddToRoleAsync(user, "Student").Wait();
                 }
 
                 var adminUser = new User
@@ -52,7 +53,7 @@ namespace SIMS.API.Data
                 if (result.Succeeded)
                 {
                     var admin = this.userManager.FindByNameAsync("admin").Result;
-                    this.userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"}).Wait();
+                    this.userManager.AddToRolesAsync(admin, new[] {"Admin"}).Wait();
                 }
             }
         }

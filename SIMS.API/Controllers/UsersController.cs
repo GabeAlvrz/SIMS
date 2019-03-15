@@ -4,10 +4,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIMS.API.Data;
 using SIMS.API.Dtos;
 using SIMS.API.Helpers;
+using SIMS.API.Models;
 
 namespace SIMS.API.Controllers
 {
@@ -17,9 +19,11 @@ namespace SIMS.API.Controllers
     {
         private readonly ISimsRepository repo;
         private readonly IMapper mapper;
+        private readonly UserManager<User> userManager;
 
-        public UsersController(ISimsRepository repo, IMapper mapper)
+        public UsersController(ISimsRepository repo, IMapper mapper, UserManager<User> userManager)
         {
+            this.userManager = userManager;
             this.repo = repo;
             this.mapper = mapper;
         }
@@ -31,7 +35,8 @@ namespace SIMS.API.Controllers
             var userFromRepo = await this.repo.GetUser(currentUserId);
             userParams.UserId = currentUserId;
 
-            if (string.IsNullOrEmpty(userParams.Gender)) {
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
                 userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
             }
 
@@ -53,19 +58,22 @@ namespace SIMS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> updateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
                 return Unauthorized();
             }
-            var userFromRepo = await this.repo.GetUser(id);
+            //var userFromRepo = await this.repo.GetUser(id);
+            var userFromRepo = await this.userManager.FindByIdAsync(id.ToString());
             this.mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await this.repo.SaveAll()) {
+            if (await this.repo.SaveAll())
+            {
                 return NoContent();
             }
 
             throw new Exception($"Updating user {id} failed on save");
 
         }
-        
+
     }
 }

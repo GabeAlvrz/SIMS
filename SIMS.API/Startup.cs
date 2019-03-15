@@ -67,8 +67,10 @@ namespace SIMS.API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
-                options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
+                options.AddPolicy("RequireStaffRole", policy => policy.RequireRole("Staff"));
+                options.AddPolicy("RequireFacultyRole", policy => policy.RequireRole("Faculty"));
+                options.AddPolicy("RequireAdvisorRole", policy => policy.RequireRole("Advisor"));
+                options.AddPolicy("RequireStudentRole", policy => policy.RequireRole("Student"));
             });
 
             services.AddMvc(options => 

@@ -70,7 +70,7 @@ namespace SIMS.API.Controllers
 
         }
 
-        [Authorize(Policy = "ModeratePhotoRole")]
+        //[Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photosForModeration")]
         public IActionResult GetPhotosForModeration()
         {
