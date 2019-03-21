@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using SIMS.API.Data;
 using SIMS.API.Dtos;
 using SIMS.API.Models;
+using Novell.Directory.Ldap;
 
 namespace SIMS.API.Controllers
 {
@@ -55,11 +56,28 @@ namespace SIMS.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var user = await this.userManager.FindByNameAsync(userForLoginDto.Username);
+           var user = (User)null;
+            var hProceed = 0;
+            var result=(Microsoft.AspNetCore.Identity.SignInResult)null;
+            if (LdapLoginOk(userForLoginDto)==1) {
+                user = await this.userManager.FindByNameAsync(userForLoginDto.Username);
+                //result = await this.signInManager.PreSignInCheck( user);
+                result = new Microsoft.AspNetCore.Identity.SignInResult();
+                //result.Success=true;
+                hProceed=1;
+            } else {
+                user = await this.userManager.FindByNameAsync(userForLoginDto.Username);
 
-            var result = await this.signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+                result = await this.signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+                if (result.Succeeded) hProceed=1;
+            }
 
-            if (result.Succeeded)
+            if (user == null) {
+                return Unauthorized();
+            }
+            
+
+            if (hProceed==1)
             {
                 var appUser = await this.userManager.Users.Include(p => p.Photos)
                     .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
@@ -107,6 +125,35 @@ namespace SIMS.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        public int LdapLoginOk(UserForLoginDto userForLoginDto) {
+            LdapConnection ldapConn = new LdapConnection();
+            int ldapVersion = LdapConnection.Ldap_V3;
+
+            // Uncomment the following 5 lines when test with school ldap
+            ldapConn.SecureSocketLayer=true;
+            string ldapServer = "AD.SIU.EDU";
+            int ldapPort =636;
+            string ldapUserDN = "AD\\"+userForLoginDto.Username;
+            string ldapPasswd = userForLoginDto.Password;
+
+            // Comment out the following 4 lines when test with school ldap
+            //string ldapServer = "ldap.forumsys.com";
+            //int ldapPort =389;
+            //string ldapUserDN = "uid="+userForLoginDto.Username+";dc=example;dc=com";
+            //string ldapPasswd = userForLoginDto.Password;
+
+            try {
+                ldapConn.Connect(ldapServer, ldapPort);  
+                ldapConn.Bind(ldapVersion, ldapUserDN, ldapPasswd);
+                ldapConn.Disconnect();
+                Console.WriteLine("LDAP Login OK");
+                return 1;
+            } catch ( LdapException e) {
+                Console.WriteLine("Ldap Err: "+e.ToString());
+            }
+
+            return 0;
         }
     }
 }
