@@ -46,6 +46,7 @@ namespace SIMS.API.Controllers
 
             if (result.Succeeded)
             {
+                await this.userManager.AddToRoleAsync(userToCreate, "Student");
                 return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn); //throw code for now
             }
 
