@@ -27,17 +27,27 @@ namespace SIMS.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await this.context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await this.context.Users.Include(bm => bm.BachelorsMentor)
+                                               .Include(a => a.BachelorsProjectAdvisor)
+                                               .Include(a => a.BachelorsThesisAdvisor)
+                                               .Include(a => a.MastersProjectAdvisor)
+                                               .Include(a => a.MastersThesisAdvisor)
+                                               .Include(c => c.MastersCommittee)
+                                               .Include(a => a.DoctorateAdvisor)
+                                               .Include(a => a.ExternalAdvisor)
+                                               .Include(a => a.DoctorateCommittee)
+                                               .Include(p => p.Photos)
+                                               .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = this.context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = this.context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastName).AsQueryable();
 
             users = users.Where(u => u.Id != userParams.UserId);
 
-            users = users.Where(u => u.Gender == userParams.Gender);
+            //users = users.Where(u => u.Gender == userParams.Gender);
 
             if (userParams.MinAge != 18 || userParams.MaxAge != 99) {
                 var minDob = DateTime.Today.AddYears(-userParams.MaxAge-1);
@@ -47,14 +57,14 @@ namespace SIMS.API.Data
             }
 
             if (!string.IsNullOrEmpty(userParams.OrderBy)) {
-                switch(userParams.OrderBy) {
-                    case "created":
-                        users = users.OrderByDescending(u => u.Created);
-                        break;
-                    default:
-                        users = users.OrderByDescending(u => u.LastActive);
-                        break;
-                }
+                // switch(userParams.OrderBy) {
+                //     case "created":
+                //         users = users.OrderByDescending(u => u.Created);
+                //         break;
+                //     default:
+                //         users = users.OrderByDescending(u => u.LastActive);
+                //         break;
+                // }
             }
 
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);

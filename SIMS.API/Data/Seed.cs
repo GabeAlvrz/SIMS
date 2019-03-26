@@ -20,7 +20,7 @@ namespace SIMS.API.Data
         {
             if (!this.userManager.Users.Any())
             {
-                var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+                var userData = System.IO.File.ReadAllText("Data/generated.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
                 var roles = new List<Role>

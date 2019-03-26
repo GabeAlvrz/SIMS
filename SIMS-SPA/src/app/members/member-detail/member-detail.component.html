@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row">
-    <h1>{{ user.knownAs }}'s Profile</h1>
+    <h1>{{ user.firstName }}'s Profile</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -8,7 +8,7 @@
         <img
           class="card-img-top img-thumbnail"
           src="{{ user.photoUrl || '../../../assets/user.png' }}"
-          alt="{{ user.knownAs }}"
+          alt="{{ user.firstName }}"
         />
         <div class="card-body">
           <div>
@@ -17,15 +17,15 @@
           </div>
           <div>
             <strong>Address:</strong>
-            <p>street<br>{{user.city}}<br>{{user.country}}</p>
+            <p>{{user.street}}<br>{{user.city}}<br>{{user.state}}<br>{{user.country}}</p>
           </div>
           <div>
             <strong>Email:</strong>
-            <p>email@host</p>
+            <p>{{user.email}}</p>
           </div>
           <div>
             <strong>Phone Number:</strong>
-            <p>number goes here</p>
+            <p>{{user.phoneNumber}}</p>
           </div>
           <!-- <div>
             <div>
@@ -59,8 +59,9 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="About {{ user.knownAs }}">
+          <tab heading="About {{ user.firstName }}">
             <h6>Student's Status:</h6>
+            <p>{{user.currentAcademicLevel}}</p>
             <h6>Student ID:</h6>
             <p>{{user.userName}}</p>
             <h6>First Name:</h6>
@@ -70,48 +71,77 @@
             <h6>Last Name:</h6>
             <p>{{user.lastName}}</p>
             <h6>CS Degree Program:</h6>
+            <p>{{user.degreeProgram}}</p>
             <h6>Current Program:</h6>
+            <p>{{user.currentProgram}}</p>
             <h6>Current Academic Level:</h6>
+            <p>{{user.currentAcademicLevel}}</p>
             <h6>Email:</h6>
+            <p>{{user.email}}</p>
             <h6>Phone Number 1:</h6>
+            <p>{{user.phoneNumber}}</p>
             <h6>Phone Number 2:</h6>
+            <p>{{user.phoneNumber2 || "none"}}</p>
+            <h6>Notes:</h6>
+            <p>{{user.notes}}</p>
             <!-- <p>{{user.introduction}}</p>
             <h4>Looking For</h4>
             <p>{{user.lookingFor}}</p> -->
           </tab>
-          <tab heading="Bachelor Details">
+          <tab heading="Bachelor's Details">
             <!-- <h4>Interests</h4>
             <p>{{user.interests}}</p> -->
             <h6>Start Date:</h6>
+            <p>{{user.bachelorsStartDate}}</p>
             <h6>Faculty Mentor:</h6>
+            <p>{{user.bachelorsMentor}}</p>
             <h6>Senior Project Advisor:</h6>
+            <p>{{user.bachelorsProjectAdvisor}}</p>
             <h6>Senior Thesis Advisor:</h6>
+            <p>{{user.bachelorsThesisAdvisor}}</p>
             <h6>Senior Project Title:</h6>
+            <p>{{user.bachelorsProjectTitle}}</p>
             <h6>Senior Thesis Title:</h6>
+            <p>{{user.bachelorsThesisTitle}}</p>
             <h6>BA/BS Graduation Date:</h6>
+            <p>{{user.bachelorsGradDate}}</p>
           </tab>
-          <tab heading="Master Details">
+          <tab heading="Master's Details">
             <h6>Master's Focus:</h6>
+            <p>{{user.mastersFocus}}</p>
             <h6>Start Date:</h6>
-            <h6>Master Project Advisor:</h6>
-            <h6>Master Thesis Advisor:</h6>
+            <p>{{user.mastersStartDate}}</p>
+            <h6>Master's Project Advisor:</h6>
+            <p>{{user.mastersProjectAdvisor}}</p>
+            <h6>Master's Thesis Advisor:</h6>
+            <p>{{user.mastersThesisAdvisor}}</p>
             <h6>Committee Member 1:</h6>
             <h6>Committee Member 2:</h6>
             <h6>Committee Member 3:</h6>
             <h6>Committee Member 4:</h6>
             <h6>Committee Member 5:</h6>
             <h6>Committee Formed Date:</h6>
-            <h6>MS Defense Date:</h6>
+            <p>{{user.mastersCommitteeFormDate}}</p>
+            <h6>Master's Defense Date:</h6>
+            <p>{{user.mastersDefenseDate}}</p>
             <h6>Project Title:</h6>
+            <p>{{user.mastersProjectTitle}}</p>
             <h6>Thesis Title:</h6>
-            <h6>MS Graduation Date:</h6>
+            <p>{{user.mastersThesisTitle}}</p>
+            <h6>Master's Graduation Date:</h6>
+            <p>{{user.mastersGradDate}}</p>
           </tab>
           <tab heading="PhD Details">
             <h6>Doctoral Candidate:</h6>
+            <p>{{user.doctoralCandidate}}</p>
             <h6>Start Date:</h6>
+            <p>{{user.doctorateStartDate}}</p>
             <h6>Date Accepted for Candidacy:</h6>
+            <p>{{user.dateAcceptedForCandidacy}}</p>
             <h6>Advisor:</h6>
+            <p>{{user.doctorateAdvisor}}</p>
             <h6>External Advisor:</h6>
+            <p>{{user.externalAdvisor}}</p>
             <h6>Committee Member 1:</h6>
             <h6>Committee Member 2:</h6>
             <h6>Committee Member 3:</h6>
@@ -119,9 +149,11 @@
             <h6>Committee Member 5:</h6>
             <h6>Committee Member 6:</h6>
             <h6>Dissertation Defense Date:</h6>
+            <p>{{user.dissertationDefenseDate}}</p>
             <h6>Dissertation Title:</h6>
-            <h6>Dissertation:</h6>
+            <p>{{user.dissertationTitle}}</p>
             <h6>PhD Graduation Date:</h6>
+            <p>{{user.doctorateGradDate}}</p>
           </tab>
           <tab heading="Photos">
             <ngx-gallery

@@ -132,17 +132,17 @@ namespace SIMS.API.Controllers
             int ldapVersion = LdapConnection.Ldap_V3;
 
             // Uncomment the following 5 lines when test with school ldap
-            ldapConn.SecureSocketLayer=true;
-            string ldapServer = "AD.SIU.EDU";
-            int ldapPort =636;
-            string ldapUserDN = "AD\\"+userForLoginDto.Username;
-            string ldapPasswd = userForLoginDto.Password;
+            // ldapConn.SecureSocketLayer=true;
+            // string ldapServer = "AD.SIU.EDU";
+            // int ldapPort =636;
+            // string ldapUserDN = "AD\\"+userForLoginDto.Username;
+            // string ldapPasswd = userForLoginDto.Password;
 
             // Comment out the following 4 lines when test with school ldap
-            //string ldapServer = "ldap.forumsys.com";
-            //int ldapPort =389;
-            //string ldapUserDN = "uid="+userForLoginDto.Username+";dc=example;dc=com";
-            //string ldapPasswd = userForLoginDto.Password;
+            string ldapServer = "ldap.forumsys.com";
+            int ldapPort =389;
+            string ldapUserDN = "uid="+userForLoginDto.Username+";dc=example;dc=com";
+            string ldapPasswd = userForLoginDto.Password;
 
             try {
                 ldapConn.Connect(ldapServer, ldapPort);  

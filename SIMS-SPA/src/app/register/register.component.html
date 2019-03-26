@@ -1,22 +1,13 @@
 <div class="container">
-<form [formGroup]="registerForm" (ngSubmit)="register()">
-    <h2 class="text-center text-primary">Sign Up</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <h2 class="text-center text-primary">Register User</h2>
     <hr>
-  
+    <h4><strong>General Information</strong></h4>
+    <p></p>
     <div class="form-group">
-      <input [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}" 
-      type="text" class="form-control" formControlName="username" placeholder="Username or ID">
+      <input [ngClass]="{'is-invalid': registerForm.get('userName').errors && registerForm.get('userName').touched}" 
+      type="text" class="form-control" formControlName="userName" placeholder="Username">
       <div class="invalid-feedback">Please enter a username</div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label" style="margin-right:10px">Level: </label>
-      <label class="radio-inline">
-        <input class="mr-3" type="radio" value="undergraduate" formControlName="level">Undergraduate
-      </label>
-      <label class="radio-inline ml-3">
-        <input class="mr-3" type="radio" value="masters" formControlName="level">Graduate
-      </label>
     </div>
 
     <div class="form-group">
@@ -36,19 +27,10 @@
     </div>
 
     <div class="form-group">
-      <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}" class="form-control"
-        placeholder="Known as" formControlName="knownAs">
-      <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">Known as is required</div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label" style="margin-right:10px">Gender: </label>
-      <label class="radio-inline">
-        <input class="mr-3" type="radio" value="male" formControlName="gender">Male
-      </label>
-      <label class="radio-inline ml-3">
-        <input class="mr-3" type="radio" value="female" formControlName="gender">Female
-      </label>
+      <input [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}" 
+        type="email" class="form-control" formControlName="email" placeholder="Email">
+      <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">Email is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('email')">Incorrect email format</div>
     </div>
 
     <div class="form-group">
@@ -57,7 +39,7 @@
       <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
         placeholder="City" formControlName="city">
       <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">City is required</div>
@@ -67,7 +49,7 @@
       <input [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}" class="form-control"
         placeholder="Country" formControlName="country">
       <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">Country is required</div>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <input [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}" 
@@ -84,7 +66,289 @@
       <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">Confirm password required</div>
       <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched">Password does not match</div>
     </div>
-  
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Role: </label>
+        <label class="radio-inline">
+            Student<input class="ml-2" type="radio" name="initialRole" value="Student" formControlName="initialRole">
+        </label>
+        <label class="radio-inline ml-3">
+            Faculty<input class="ml-2" type="radio" name="initialRole" value="Faculty" formControlName="initialRole">
+        </label>
+        <label class="radio-inline ml-3">
+            Staff<input class="ml-2" type="radio" name="initialRole" value="Staff" formControlName="initialRole">
+        </label>
+    </div>
+
+    <div class="form-group" *ngIf="registerForm.value.initialRole == 'Student'">
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Level: </label>
+        <label class="radio-inline">
+            Undergraduate<input class="ml-2" type="radio" name="currentAcademicLevel" value="Undergraduate" formControlName="currentAcademicLevel">
+        </label>
+        <label class="radio-inline ml-3">
+            Graduate<input class="ml-2" type="radio" name="currentAcademicLevel" value="Graduate" formControlName="currentAcademicLevel">
+        </label>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" style="margin-right:10px">CS Degree Program: </label>
+      <label class="check-inline">
+        B.A<input class="ml-2 mr-2" type="radio" value="BA" formControlName="degreeProgram">
+      </label>
+      <label class="check-inline ml-2">
+        B.S<input class="ml-2 mr-2" type="radio" value="BS" formControlName="degreeProgram">
+      </label>
+      <label class="check-inline ml-2">
+        M.S<input class="ml-2 mr-2" type="radio" value="MS" formControlName="degreeProgram">
+      </label>
+      <label class="check-inline ml-2">
+        Ph.D<input class="ml-2 mr-2" type="radio" value="PHD" formControlName="degreeProgram">
+      </label>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Current program: </label>
+        <label class="radio-inline">
+            Bachelor's<input class="ml-2" type="radio" name="currentProgram" value="Bachelor's" formControlName="currentProgram">
+        </label>
+        <label class="radio-inline ml-3">
+            Master's<input class="ml-2" type="radio" name="currentProgram" value="Master's" formControlName="currentProgram">
+        </label>
+        <label class="radio-inline ml-3">
+            Ph.D<input class="ml-2" type="radio" name="currentProgram" value="Ph.D" formControlName="currentProgram">
+        </label>
+    </div>
+
+    <hr>
+    <h4><strong>Bachelor's Information</strong></h4>
+    <p></p>
+
+    <div class="form-group">
+      <input class="form-control"
+        placeholder="Bachelor's Start Date" formControlName="bachelorsStartDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+      <select class="form-control" formControlName="bachelorsMentor">
+        <option value="" disabled selected>Bachelor's Mentor</option>
+        <option value="John Smith">John Smith</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="form-control" formControlName="bachelorsProjectAdvisor">
+        <option value="" disabled selected>Senior Project Advisor</option>
+        <option value="John Smith">John Smith</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <select class="form-control" formControlName="bachelorsThesisAdvisor">
+          <option value="" disabled selected>Senior Thesis Advisor</option>
+          <option value="John Smith">John Smith</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Bachelor's Graduation Date" formControlName="bachelorsGradDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="bachelorsProjectTitle" placeholder="Senior Project Title">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="bachelorsThesisTitle" placeholder="Senior Thesis Title">
+    </div>
+
+    <hr>
+
+    <h4><strong>Master's Information</strong></h4>
+    <p></p>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Master's Start Date" formControlName="mastersStartDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Master's Focus: </label>
+        <label class="radio-inline">
+            Project<input class="ml-2" type="radio" name="mastersFocus" value="Project" formControlName="mastersFocus">
+        </label>
+        <label class="radio-inline ml-3">
+            Thesis<input class="ml-2" type="radio" name="mastersFocus" value="Thesis" formControlName="mastersFocus">
+        </label>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" style="margin-right:10px">Master's Project Advisor</label>
+        <select class="form-control" formControlName="mastersProjectAdvisor">
+          <option value="" disabled selected hidden>Project Advisor</option>
+          <option value="John Smith">John Smith</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Master's Thesis Advisor</label>
+        <select class="form-control" formControlName="mastersThesisAdvisor">
+          <option value="" disabled selected hidden>Thesis Advisor</option>
+          <option value="John Smith">John Smith</option>
+        </select>
+    </div>
+
+    <!-- <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 1</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 2</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 2</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 3</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 3</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 4</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 4</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 5</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 5</option>
+        </select>
+    </div> -->
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Committee Form Date" formControlName="mastersCommitteeFormDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Master's Defense Date" formControlName="mastersDefenseDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="mastersProjectTitle" placeholder="Master's Project Title">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="mastersThesisTitle" placeholder="Master's Thesis Title">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Master's Graduation Date" formControlName="mastersGradDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <hr>
+    <h4><strong>Doctorate's Information</strong></h4>
+    <p></p>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Doctoral Candidate: </label>
+        <label class="radio-inline">
+            Yes<input class="ml-2" type="radio" name="doctoralCandidate" value="Yes" formControlName="doctoralCandidate">
+        </label>
+        <label class="radio-inline ml-3">
+            No<input class="ml-2" type="radio" name="doctoralCandidate" value="No" formControlName="doctoralCandidate">
+        </label>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Doctorate Start Date" formControlName="doctorateStartDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Doctorate Candidacy Acceptance Date" formControlName="dateAcceptedForCandidacy" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Doctorate Advisor</label>
+          <select class="form-control" formControlName="doctorateAdvisor">
+            <option value="" disabled selected hidden>Doctorate Advisor</option>
+            <option value="John Smith">John Smith</option>
+          </select>
+    </div>
+
+    <!-- <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 1</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 2</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 2</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 3</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 3</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 4</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 4</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 5</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 5</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" style="margin-right:10px">Committee Member 6</label>
+        <select class="form-control" formControlName="">
+          <option value="" disabled selected>Member 6</option>
+        </select>
+    </div> -->
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Dissertation Defense Date" formControlName="dissertationDefenseDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="dissertationTitle" placeholder="Dissertation Title">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control"
+          placeholder="Doctorate Graduation Date" formControlName="doctorateGradDate" type="text" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <hr>
+    </div>
+
+    <!-- submit cancel buttons -->
     <div class="form-group text-center">
       <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
       <button class="btn btn-default" type="button" (click)="cancel()"><font color="gray">Cancel</font></button>

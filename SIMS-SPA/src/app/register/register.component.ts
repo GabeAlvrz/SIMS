@@ -5,19 +5,22 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
+import { AdminService } from '../_services/admin.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   user: User;
+  roles: any[];
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private authService: AuthService, private router: Router,
+  constructor(private adminService: AdminService, private authService: AuthService, private router: Router,
     private alertify: AlertifyService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -29,16 +32,39 @@ export class RegisterComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      username: ['', Validators.required],
+      userName: ['', Validators.required],
       firstName: ['', Validators.required],
       middleName: [''],
       lastName: ['', Validators.required],
-      gender: ['male', Validators.required],
-      level: ['', Validators.required],
-      knownAs: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       dateOfBirth: [null, Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
+      initialRole: ['', Validators.required],
+      currentAcademicLevel: [''],
+      degreeProgram: [''],
+      currentProgram: [''],
+      bachelorsStartDate: [''],
+      bachelorsMentor: [''],
+      bachelorsProjectAdvisor: [''],
+      bachelorsThesisAdvisor: [''],
+      bachelorsProjectTitle: [''],
+      bachelorsThesisTitle: [''],
+      bachelorsGradDate: [''],
+      mastersStartDate: [''],
+      mastersFocus: [''],
+      mastersProjectAdvisor: [''],
+      mastersThesisAdvisor: [''],
+      mastersCommitteeFormDate: [''],
+      mastersDefenseDate: [''],
+      mastersProjectTitle: [''],
+      mastersThesisTitle: [''],
+      mastersGradDate: [''],
+      doctoralCandidate: [''],
+      doctorateStartDate: [''],
+      dateAcceptedForCandidacy: [''],
+      doctorateAdvisor: [''],
+      dissertationDefenseDate: [''],
+      dissertationTitle: [''],
+      doctorateGradDate: [''],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, {validator: this.passwordMatchValidator});
@@ -56,6 +82,10 @@ export class RegisterComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       }, () => {
+        const rolesToUpdate = {
+          roleNames: [this.registerForm.value.initialRole]
+        };
+        this.adminService.updateUserRoles(this.user, rolesToUpdate).subscribe(() => {});
         this.router.navigate(['/mainpage']);
         // this.authService.login(this.user).subscribe(() => {
         //   this.router.navigate(['/members']);
