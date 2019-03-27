@@ -86,44 +86,64 @@ namespace SIMS.API.Migrations
 
             modelBuilder.Entity("SIMS.API.Models.BachelorsMentor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("MentorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("BachelorsMentors");
                 });
 
             modelBuilder.Entity("SIMS.API.Models.BachelorsProjectAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("BachelorsProjectAdvisors");
                 });
 
             modelBuilder.Entity("SIMS.API.Models.BachelorsThesisAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("BachelorsThesisAdvisors");
                 });
 
             modelBuilder.Entity("SIMS.API.Models.DoctorateAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("DoctorateAdvisors");
                 });
@@ -131,6 +151,8 @@ namespace SIMS.API.Migrations
             modelBuilder.Entity("SIMS.API.Models.DoctorateCommittee", b =>
                 {
                     b.Property<int>("UserId");
+
+                    b.Property<DateTime>("FormDate");
 
                     b.Property<string>("Member1");
 
@@ -237,11 +259,16 @@ namespace SIMS.API.Migrations
 
             modelBuilder.Entity("SIMS.API.Models.ExternalAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("ExternalAdvisors");
                 });
@@ -298,6 +325,8 @@ namespace SIMS.API.Migrations
                 {
                     b.Property<int>("UserId");
 
+                    b.Property<DateTime>("FormDate");
+
                     b.Property<string>("Member1");
 
                     b.Property<string>("Member2");
@@ -315,22 +344,32 @@ namespace SIMS.API.Migrations
 
             modelBuilder.Entity("SIMS.API.Models.MastersProjectAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("MastersProjectAdvisors");
                 });
 
             modelBuilder.Entity("SIMS.API.Models.MastersThesisAdvisor", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvisorName");
 
+                    b.Property<int>("UserId1");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("MastersThesisAdvisors");
                 });
@@ -389,9 +428,15 @@ namespace SIMS.API.Migrations
 
                     b.Property<DateTime>("BachelorsGradDate");
 
+                    b.Property<string>("BachelorsMentor");
+
+                    b.Property<string>("BachelorsProjectAdvisor");
+
                     b.Property<string>("BachelorsProjectTitle");
 
                     b.Property<DateTime>("BachelorsStartDate");
+
+                    b.Property<string>("BachelorsThesisAdvisor");
 
                     b.Property<string>("BachelorsThesisTitle");
 
@@ -418,6 +463,8 @@ namespace SIMS.API.Migrations
 
                     b.Property<string>("DoctoralCandidate");
 
+                    b.Property<string>("DoctorateAdvisor");
+
                     b.Property<DateTime>("DoctorateGradDate");
 
                     b.Property<DateTime>("DoctorateStartDate");
@@ -427,6 +474,8 @@ namespace SIMS.API.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("ExternalAdvisor");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
@@ -435,17 +484,19 @@ namespace SIMS.API.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<DateTime>("MastersCommitteeFormDate");
-
                     b.Property<DateTime>("MastersDefenseDate");
 
                     b.Property<string>("MastersFocus");
 
                     b.Property<DateTime>("MastersGradDate");
 
+                    b.Property<string>("MastersProjectAdvisor");
+
                     b.Property<string>("MastersProjectTitle");
 
                     b.Property<DateTime>("MastersStartDate");
+
+                    b.Property<string>("MastersThesisAdvisor");
 
                     b.Property<string>("MastersThesisTitle");
 
@@ -550,32 +601,32 @@ namespace SIMS.API.Migrations
             modelBuilder.Entity("SIMS.API.Models.BachelorsMentor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("BachelorsMentor")
-                        .HasForeignKey("SIMS.API.Models.BachelorsMentor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIMS.API.Models.BachelorsProjectAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("BachelorsProjectAdvisor")
-                        .HasForeignKey("SIMS.API.Models.BachelorsProjectAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIMS.API.Models.BachelorsThesisAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("BachelorsThesisAdvisor")
-                        .HasForeignKey("SIMS.API.Models.BachelorsThesisAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIMS.API.Models.DoctorateAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("DoctorateAdvisor")
-                        .HasForeignKey("SIMS.API.Models.DoctorateAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -590,8 +641,8 @@ namespace SIMS.API.Migrations
             modelBuilder.Entity("SIMS.API.Models.ExternalAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("ExternalAdvisor")
-                        .HasForeignKey("SIMS.API.Models.ExternalAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -606,16 +657,16 @@ namespace SIMS.API.Migrations
             modelBuilder.Entity("SIMS.API.Models.MastersProjectAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("MastersProjectAdvisor")
-                        .HasForeignKey("SIMS.API.Models.MastersProjectAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SIMS.API.Models.MastersThesisAdvisor", b =>
                 {
                     b.HasOne("SIMS.API.Models.User", "User")
-                        .WithOne("MastersThesisAdvisor")
-                        .HasForeignKey("SIMS.API.Models.MastersThesisAdvisor", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

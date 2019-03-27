@@ -56,12 +56,16 @@ namespace SIMS.API.Migrations
                     CurrentProgram = table.Column<string>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     BachelorsStartDate = table.Column<DateTime>(nullable: false),
+                    BachelorsMentor = table.Column<string>(nullable: true),
+                    BachelorsProjectAdvisor = table.Column<string>(nullable: true),
+                    BachelorsThesisAdvisor = table.Column<string>(nullable: true),
                     BachelorsProjectTitle = table.Column<string>(nullable: true),
                     BachelorsThesisTitle = table.Column<string>(nullable: true),
                     BachelorsGradDate = table.Column<DateTime>(nullable: false),
                     MastersStartDate = table.Column<DateTime>(nullable: false),
                     MastersFocus = table.Column<string>(nullable: true),
-                    MastersCommitteeFormDate = table.Column<DateTime>(nullable: false),
+                    MastersProjectAdvisor = table.Column<string>(nullable: true),
+                    MastersThesisAdvisor = table.Column<string>(nullable: true),
                     MastersDefenseDate = table.Column<DateTime>(nullable: false),
                     MastersProjectTitle = table.Column<string>(nullable: true),
                     MastersThesisTitle = table.Column<string>(nullable: true),
@@ -69,6 +73,8 @@ namespace SIMS.API.Migrations
                     DoctoralCandidate = table.Column<string>(nullable: true),
                     DoctorateStartDate = table.Column<DateTime>(nullable: false),
                     DateAcceptedForCandidacy = table.Column<DateTime>(nullable: false),
+                    DoctorateAdvisor = table.Column<string>(nullable: true),
+                    ExternalAdvisor = table.Column<string>(nullable: true),
                     DissertationDefenseDate = table.Column<DateTime>(nullable: false),
                     DissertationTitle = table.Column<string>(nullable: true),
                     DoctorateGradDate = table.Column<DateTime>(nullable: false)
@@ -282,15 +288,17 @@ namespace SIMS.API.Migrations
                 name: "BachelorsMentors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     MentorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BachelorsMentors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_BachelorsMentors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_BachelorsMentors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -300,15 +308,17 @@ namespace SIMS.API.Migrations
                 name: "BachelorsProjectAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BachelorsProjectAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_BachelorsProjectAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_BachelorsProjectAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -318,15 +328,17 @@ namespace SIMS.API.Migrations
                 name: "BachelorsThesisAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BachelorsThesisAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_BachelorsThesisAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_BachelorsThesisAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -336,15 +348,17 @@ namespace SIMS.API.Migrations
                 name: "DoctorateAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DoctorateAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_DoctorateAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_DoctorateAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -355,6 +369,7 @@ namespace SIMS.API.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
+                    FormDate = table.Column<DateTime>(nullable: false),
                     Member1 = table.Column<string>(nullable: true),
                     Member2 = table.Column<string>(nullable: true),
                     Member3 = table.Column<string>(nullable: true),
@@ -377,15 +392,17 @@ namespace SIMS.API.Migrations
                 name: "ExternalAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExternalAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_ExternalAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_ExternalAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -396,6 +413,7 @@ namespace SIMS.API.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
+                    FormDate = table.Column<DateTime>(nullable: false),
                     Member1 = table.Column<string>(nullable: true),
                     Member2 = table.Column<string>(nullable: true),
                     Member3 = table.Column<string>(nullable: true),
@@ -417,15 +435,17 @@ namespace SIMS.API.Migrations
                 name: "MastersProjectAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MastersProjectAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_MastersProjectAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_MastersProjectAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -435,15 +455,17 @@ namespace SIMS.API.Migrations
                 name: "MastersThesisAdvisors",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId1 = table.Column<int>(nullable: false),
                     AdvisorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MastersThesisAdvisors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_MastersThesisAdvisors_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_MastersThesisAdvisors_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -508,6 +530,41 @@ namespace SIMS.API.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BachelorsMentors_UserId1",
+                table: "BachelorsMentors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BachelorsProjectAdvisors_UserId1",
+                table: "BachelorsProjectAdvisors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BachelorsThesisAdvisors_UserId1",
+                table: "BachelorsThesisAdvisors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoctorateAdvisors_UserId1",
+                table: "DoctorateAdvisors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExternalAdvisors_UserId1",
+                table: "ExternalAdvisors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MastersProjectAdvisors_UserId1",
+                table: "MastersProjectAdvisors",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MastersThesisAdvisors_UserId1",
+                table: "MastersThesisAdvisors",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId",

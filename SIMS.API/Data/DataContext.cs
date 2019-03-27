@@ -45,7 +45,7 @@ namespace SIMS.API.Data
             builder.Entity<BachelorsMentor>(bachelorsMentor =>
             {
                 bachelorsMentor.HasKey(m => new {m.UserId});
-                bachelorsMentor.HasOne(u => u.User);
+                //bachelorsMentor.HasOne(u => u.User);
 
             });
 
@@ -90,6 +90,7 @@ namespace SIMS.API.Data
                 doctorateCommittee.HasKey(c => new {c.UserId});
                 
             });
+
         }
         
     }

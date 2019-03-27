@@ -12,58 +12,42 @@ namespace SIMS.API.Helpers
             CreateMap<User, UserForListDto>().ForMember(dest => dest.PhotoUrl, opt => {
                 opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
             });
-            // .ForMember(dest => dest.Age, opt => {
-            //     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-            // });
-            CreateMap<User, UserForDetailedDto>().ForMember(dest => dest.PhotoUrl, opt => {
-                opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
-            }).ForMember(dest => dest.BachelorsMentor, opt => {
-                opt.MapFrom(src => src.BachelorsMentor.MentorName);
-            }).ForMember(dest => dest.BachelorsProjectAdvisor, opt => {
-                opt.MapFrom(src => src.BachelorsProjectAdvisor.AdvisorName);
-            }).ForMember(dest => dest.BachelorsThesisAdvisor, opt => {
-                opt.MapFrom(src => src.BachelorsThesisAdvisor.AdvisorName);
-            }).ForMember(dest => dest.MastersProjectAdvisor, opt => {
-                opt.MapFrom(src => src.MastersProjectAdvisor.AdvisorName);
-            }).ForMember(dest => dest.MastersThesisAdvisor, opt => {
-                opt.MapFrom(src => src.MastersThesisAdvisor.AdvisorName);
-            }).ForMember(dest => dest.DoctorateAdvisor, opt => {
-                opt.MapFrom(src => src.DoctorateAdvisor.AdvisorName);
-            }).ForMember(dest => dest.ExternalAdvisor, opt => {
-                opt.MapFrom(src => src.ExternalAdvisor.AdvisorName);
-            });
-            // .ForMember(dest => dest.Age, opt => {
-            //     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-            // });
             CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<UserForUpdateDto, User>();
-            CreateMap<string, BachelorsMentor>().ForMember(dest => dest.MentorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, BachelorsProjectAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, BachelorsThesisAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, MastersProjectAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, MastersThesisAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, DoctorateAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
-            CreateMap<string, ExternalAdvisor>().ForMember(dest => dest.AdvisorName, opt => {
-                opt.MapFrom(src => src);
-            });
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<MastersCommittee, CommitteeDto>().ForMember(dest => dest.FormDate, opt => {
+                opt.MapFrom(src => src.FormDate.ToShortDateString());
+            });
+            CreateMap<DoctorateCommittee, CommitteeDto>().ForMember(dest => dest.FormDate, opt => {
+                opt.MapFrom(src => src.FormDate.ToShortDateString());
+            });
+            CreateMap<User, UserForDetailedDto>().ForMember(dest => dest.DateOfBirth, opt => {
+                opt.MapFrom(src => src.DateOfBirth.ToShortDateString());
+            }).ForMember(dest => dest.BachelorsStartDate, opt => {
+                opt.MapFrom(src => src.BachelorsStartDate.ToShortDateString());
+            }).ForMember(dest => dest.BachelorsGradDate, opt => {
+                opt.MapFrom(src => src.BachelorsGradDate.ToShortDateString());
+            }).ForMember(dest => dest.MastersStartDate, opt => {
+                opt.MapFrom(src => src.MastersStartDate.ToShortDateString());
+            }).ForMember(dest => dest.MastersDefenseDate, opt => {
+                opt.MapFrom(src => src.MastersDefenseDate.ToShortDateString());
+            }).ForMember(dest => dest.MastersGradDate, opt => {
+                opt.MapFrom(src => src.MastersGradDate.ToShortDateString());
+            }).ForMember(dest => dest.DoctorateStartDate, opt => {
+                opt.MapFrom(src => src.DoctorateStartDate.ToShortDateString());
+            }).ForMember(dest => dest.DoctorateStartDate, opt => {
+                opt.MapFrom(src => src.DoctorateStartDate.ToShortDateString());
+            }).ForMember(dest => dest.DateAcceptedForCandidacy, opt => {
+                opt.MapFrom(src => src.DateAcceptedForCandidacy.ToShortDateString());
+            }).ForMember(dest => dest.DissertationDefenseDate, opt => {
+                opt.MapFrom(src => src.DissertationDefenseDate.ToShortDateString());
+            }).ForMember(dest => dest.DoctorateGradDate, opt => {
+                opt.MapFrom(src => src.DoctorateGradDate.ToShortDateString());
+            });
             // CreateMap<UserForRegisterDto, User>().ForMember(dest => dest.BachelorsMentor, opt => {
             //     opt.MapFrom(src => src.BachelorsMentor);
             // }).ForMember(dest => dest.BachelorsMentor, opt => {
-            //     opt.MapFrom(src => src.BachelorsMentor);;
-            
+            //     opt.MapFrom(src => src.BachelorsMentor);
             CreateMap<UserForDeleteDto, User>();
         }
     }

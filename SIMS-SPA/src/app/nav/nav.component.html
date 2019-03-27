@@ -11,7 +11,7 @@
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <a class="dropdown-toggle text-dark" dropdownToggle>
-        <i class="fa fa-user-circle" aria-hidden="true"></i> Welcome {{ authService.decodedToken.firstName | titlecase }}
+        <i class="fa fa-user-circle" aria-hidden="true"></i> Welcome {{ authService.decodedToken.userName | titlecase }}
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>

@@ -27,17 +27,10 @@ namespace SIMS.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await this.context.Users.Include(bm => bm.BachelorsMentor)
-                                               .Include(a => a.BachelorsProjectAdvisor)
-                                               .Include(a => a.BachelorsThesisAdvisor)
-                                               .Include(a => a.MastersProjectAdvisor)
-                                               .Include(a => a.MastersThesisAdvisor)
-                                               .Include(c => c.MastersCommittee)
-                                               .Include(a => a.DoctorateAdvisor)
-                                               .Include(a => a.ExternalAdvisor)
+            var user = await this.context.Users.Include(c => c.MastersCommittee)
                                                .Include(a => a.DoctorateCommittee)
                                                .Include(p => p.Photos)
-                                               .FirstOrDefaultAsync(u => u.Id == id);
+                                               .FirstOrDefaultAsync(u => u.Id == id);     
             return user;
         }
 

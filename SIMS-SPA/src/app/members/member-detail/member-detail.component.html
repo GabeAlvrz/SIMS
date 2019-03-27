@@ -67,7 +67,7 @@
             <h6>First Name:</h6>
             <p>{{user.firstName}}</p>
             <h6>Middle Name:</h6>
-            <p>{{user.middleName || "none"}}</p>
+            <p>{{user.middleName}}</p>
             <h6>Last Name:</h6>
             <p>{{user.lastName}}</p>
             <h6>CS Degree Program:</h6>
@@ -81,7 +81,7 @@
             <h6>Phone Number 1:</h6>
             <p>{{user.phoneNumber}}</p>
             <h6>Phone Number 2:</h6>
-            <p>{{user.phoneNumber2 || "none"}}</p>
+            <p>{{user.phoneNumber2}}</p>
             <h6>Notes:</h6>
             <p>{{user.notes}}</p>
             <!-- <p>{{user.introduction}}</p>
@@ -89,8 +89,6 @@
             <p>{{user.lookingFor}}</p> -->
           </tab>
           <tab heading="Bachelor's Details">
-            <!-- <h4>Interests</h4>
-            <p>{{user.interests}}</p> -->
             <h6>Start Date:</h6>
             <p>{{user.bachelorsStartDate}}</p>
             <h6>Faculty Mentor:</h6>
@@ -116,12 +114,17 @@
             <h6>Master's Thesis Advisor:</h6>
             <p>{{user.mastersThesisAdvisor}}</p>
             <h6>Committee Member 1:</h6>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.member1}}</p>
             <h6>Committee Member 2:</h6>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.member2}}</p>
             <h6>Committee Member 3:</h6>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.member3}}</p>
             <h6>Committee Member 4:</h6>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.member4}}</p>
             <h6>Committee Member 5:</h6>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.member5}}</p>
             <h6>Committee Formed Date:</h6>
-            <p>{{user.mastersCommitteeFormDate}}</p>
+            <p *ngIf="user.mastersCommittee != null">{{user.mastersCommittee.formDate}}</p>
             <h6>Master's Defense Date:</h6>
             <p>{{user.mastersDefenseDate}}</p>
             <h6>Project Title:</h6>
@@ -138,7 +141,7 @@
             <p>{{user.doctorateStartDate}}</p>
             <h6>Date Accepted for Candidacy:</h6>
             <p>{{user.dateAcceptedForCandidacy}}</p>
-            <h6>Advisor:</h6>
+            <h6>Doctorate Advisor:</h6>
             <p>{{user.doctorateAdvisor}}</p>
             <h6>External Advisor:</h6>
             <p>{{user.externalAdvisor}}</p>

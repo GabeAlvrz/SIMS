@@ -1,17 +1,18 @@
 import { Photo } from './photo';
+import { Committee } from './committee';
 
 export interface User {
     // gen info
     id: number;
     userName: string;
     firstName: string;
-    middleName?: string;
+    middleName: string;
     lastName: string;
     fullName: string;
     dateOfBirth: Date;
     email: string;
     phoneNumber: string;
-    phoneNumber2?: string;
+    phoneNumber2: string;
     street: string;
     city: string;
     state: string;
@@ -33,8 +34,7 @@ export interface User {
     mastersFocus: string;
     mastersProjectAdvisor: string;
     mastersThesisAdvisor: string;
-    mastersCommitteeMembers: string[];
-    mastersCommitteeFormDate: Date;
+    mastersCommittee: Committee;
     mastersDefenseDate: Date;
     mastersProjectTitle: string;
     mastersThesisTitle: string;
@@ -45,7 +45,7 @@ export interface User {
     dateAcceptedForCandidacy: Date;
     doctorateAdvisor: string;
     externalAdvisor: string;
-    doctorateCommitteeMembers: string[];
+    doctorateCommittee: Committee;
     dissertationDefenseDate: Date;
     dissertationTitle: string;
     doctorateGradDate: Date;

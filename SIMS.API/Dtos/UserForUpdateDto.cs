@@ -1,14 +1,45 @@
+using System;
+using System.Collections.Generic;
+using SIMS.API.Models;
+
 namespace SIMS.API.Dtos
 {
     public class UserForUpdateDto
     {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string Introduction { get; set; }
-        public string LookingFor { get; set; }
-        public string Interests { get; set; }
+        public string PhoneNumber2 { get; set; }
+        public string Street { get; set; }
         public string City { get; set; }
+        public string State { get; set; }
         public string Country { get; set; }
+        public string Notes { get; set; }
+        //public ICollection<Photo> Photos { get; set; }
+        // Bachelors
+        public DateTime? BachelorsStartDate { get; set; }
+        public string BachelorsMentor { get; set; }
+        public string BachelorsProjectAdvisor { get; set; }
+        public string BachelorsThesisAdvisor { get; set; }
+        public string BachelorsProjectTitle { get; set; }
+        public string BachelorsThesisTitle { get; set; }
+        public DateTime? BachelorsGradDate { get; set; }
+        // Masters
+        public DateTime? MastersStartDate { get; set; }
+        public string MastersFocus { get; set; }
+        public string MastersProjectAdvisor { get; set; }
+        public string MastersThesisAdvisor { get; set; }
+        public MastersCommittee MastersCommittee { get; set; }
+        public DateTime? MastersDefenseDate { get; set; }
+        public string MastersProjectTitle { get; set; }
+        public string MastersThesisTitle { get; set; }
+        public DateTime? MastersGradDate { get; set; }
+        // PhD
+        public string DoctoralCandidate { get; set; }
+        public DateTime? DoctorateStartDate { get; set; }
+        public DateTime? DateAcceptedForCandidacy { get; set; }
+        public string DoctorateAdvisor { get; set; }
+        public string ExternalAdvisor { get; set; }
+        public DoctorateCommittee DoctorateCommittee { get; set; }
+        public DateTime? DissertationDefenseDate { get; set; }
+        public string DissertationTitle { get; set; }
+        public DateTime? DoctorateGradDate { get; set; }
     }
 }

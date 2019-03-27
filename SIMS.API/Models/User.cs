@@ -26,14 +26,13 @@ namespace SIMS.API.Models
         public string CurrentProgram { get; set; }
         public string Notes { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
-        
+        public ICollection<UserRole> UserRoles { get; set; }        
 
         // Bachelors Info
         public DateTime BachelorsStartDate { get; set; }
-        public BachelorsMentor BachelorsMentor { get; set; }
-        public BachelorsProjectAdvisor BachelorsProjectAdvisor { get; set; }
-        public BachelorsThesisAdvisor BachelorsThesisAdvisor { get; set; }
+        public string BachelorsMentor { get; set; }
+        public string BachelorsProjectAdvisor { get; set; }
+        public string BachelorsThesisAdvisor { get; set; }
         public string BachelorsProjectTitle { get; set; }
         public string BachelorsThesisTitle { get; set; }
         public DateTime BachelorsGradDate { get; set; }
@@ -41,11 +40,9 @@ namespace SIMS.API.Models
         // Masters Info
         public DateTime MastersStartDate { get; set; }
         public string MastersFocus { get; set; }
-        public MastersProjectAdvisor MastersProjectAdvisor { get; set; }
-        public MastersThesisAdvisor MastersThesisAdvisor { get; set; }
-        //public ICollection<MastersCommittee> MastersCommitteeMembers { get; set; }
+        public string MastersProjectAdvisor { get; set; }
+        public string MastersThesisAdvisor { get; set; }
         public MastersCommittee MastersCommittee { get; set; }
-        public DateTime MastersCommitteeFormDate { get; set; }
         public DateTime MastersDefenseDate { get; set; }
         public string MastersProjectTitle { get; set; }
         public string MastersThesisTitle { get; set; }
@@ -55,9 +52,8 @@ namespace SIMS.API.Models
         public string DoctoralCandidate { get; set; }
         public DateTime DoctorateStartDate { get; set; }
         public DateTime DateAcceptedForCandidacy { get; set; }
-        public DoctorateAdvisor DoctorateAdvisor { get; set; }
-        public ExternalAdvisor ExternalAdvisor { get; set; }
-        // public ICollection<DoctorateCommittee> DoctorateCommitteMembers { get; set; }
+        public string DoctorateAdvisor { get; set; }
+        public string ExternalAdvisor { get; set; }
         public DoctorateCommittee DoctorateCommittee { get; set; }
         public DateTime DissertationDefenseDate { get; set; }
         public string DissertationTitle { get; set; }
