@@ -36,6 +36,7 @@ export class NavComponent implements OnInit {
       this.user1 = JSON.parse(localStorage.getItem('user'));
       console.log('firstname:', this.user1.firstName);
     }
+    return this.authService.loggedIn();
   }
 
   logout() {
