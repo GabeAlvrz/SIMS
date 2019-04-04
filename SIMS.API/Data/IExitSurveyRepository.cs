@@ -8,7 +8,7 @@ namespace SIMS.API.Data
         void Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
 
-        Task<ExitSurvey> GetExitSurvey(int Id);
+        Task<ExitSurvey> GetExitSurvey(string ssId);
         Task<IEnumerable<ExitSurvey>> GetExitSurveys();
         Task<bool> SaveAll();
     }
