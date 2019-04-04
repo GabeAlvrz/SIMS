@@ -43,6 +43,7 @@ export class ExitsurveysComponent implements OnInit {
 
   @Input()
   json: object;
+  surveyModel: Survey.Model;
 
   surveyJson: any = {
     pages: [
@@ -66,13 +67,13 @@ export class ExitsurveysComponent implements OnInit {
             name: 'ssId',
             title: 'Student ID',
             type: 'text',
-            validators: [
+            /*validators: [
               {
                 type: 'numeric',
                 minValue: 850000000,
                 maxValue: 859999999
               }
-            ]
+            ]*/
           },
           {
             name: 'degreeProgram',
@@ -80,7 +81,12 @@ export class ExitsurveysComponent implements OnInit {
             type: 'radiogroup',
             colCount: 4,
             choices: ['B.A.', 'B.S.', 'M.S.', 'Ph.D.'],
-            // isRequired: true
+            isRequired: true,
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'dropdown',
@@ -115,17 +121,33 @@ export class ExitsurveysComponent implements OnInit {
           {
             type: 'text',
             name: 'contact1PhoneHome',
-            title: 'Home Phone'
+            title: 'Home Phone',
+            isRequired: true,
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
             name: 'contact1PhoneWork',
-            title: 'Work Phone'
+            title: 'Work Phone',
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
             name: 'contact1PhoneCell',
-            title: 'Cell Phone'
+            title: 'Cell Phone',
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
@@ -167,17 +189,32 @@ export class ExitsurveysComponent implements OnInit {
           {
             type: 'text',
             name: 'contact2PhoneHome',
-            title: 'Home Phone'
+            title: 'Home Phone',
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
             name: 'contact2PhoneWork',
-            title: 'Work Phone'
+            title: 'Work Phone',
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
             name: 'contact2PhoneCell',
-            title: 'Cell Phone'
+            title: 'Cell Phone',
+            validators: [
+              {
+                type: 'numeric'
+              }
+            ]
           },
           {
             type: 'text',
@@ -341,11 +378,25 @@ export class ExitsurveysComponent implements OnInit {
     private route: ActivatedRoute, private alertify: AlertifyService) { InjectorInstance = this.injector;  }
 
   ngOnInit() {
-    const surveyModel = new Survey.Model(this.surveyJson);
-    surveyModel.onComplete.add(this.sendDataToServer);
+    this.surveyModel = new Survey.Model(this.surveyJson);
+    this.GetExitSurvey();
+    this.surveyModel.onComplete.add(this.sendDataToServer);
     Survey.StylesManager.applyTheme('bootstrap');
     Survey.defaultBootstrapCss.navigationButton = 'btn btn-primary';
-    Survey.SurveyNG.render('surveyElement', { model: surveyModel });
+    Survey.SurveyNG.render('surveyElement', { model: this.surveyModel });
+  }
+  GetExitSurvey() {
+    this.surveyModel.data = {};
+    const user1 = JSON.parse(localStorage.getItem('user'));
+    console.log('firstname:', user1.userName);
+    this.http.get(this.baseUrl + 'ExitSurveys/GetExitSurvey/' + user1.userName).subscribe(
+      (res: any) => {
+        this.surveyModel.data = res;
+        console.log(this.surveyModel.data);
+      }, error => {
+        this.alertify.error('GetExitSurveys() ' + error);
+      }
+    );
   }
 
   sendDataToServer(surveyModel) {
