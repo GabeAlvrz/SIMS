@@ -22,6 +22,7 @@ namespace SIMS.API.Data
         public DbSet<DoctorateCommittee> DoctorateCommittees { get; set; }
         public DbSet<ExitSurvey> ExitSurveys { get; set; }
         public DbSet<GradSeniorSurvey> GradSeniorSurveys { get; set; }
+        public DbSet<ThesisProject> ThesisProjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
