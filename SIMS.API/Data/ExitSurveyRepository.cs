@@ -22,9 +22,9 @@ namespace SIMS.API.Data
             _context.Remove(entity);
         }
 
-        public async Task<ExitSurvey> GetExitSurvey(int Id) 
+        public async Task<ExitSurvey> GetExitSurvey(string ssId) 
         {
-            var eSurvey = await _context.ExitSurveys.FirstOrDefaultAsync(n => n.Id == Id);
+            var eSurvey = await _context.ExitSurveys.FirstOrDefaultAsync(n => n.ssId == ssId);
 
             return eSurvey;
         }
