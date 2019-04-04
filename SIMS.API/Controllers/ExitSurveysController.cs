@@ -197,10 +197,12 @@ namespace SIMS.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("GetExitSurvey/{Id}")]
-        public async Task<IActionResult> GetExitSurvey(int Id)
+        [HttpGet("GetExitSurvey/{ssId}")]
+        public async Task<IActionResult> GetExitSurvey(string ssId)
         {
-            var eSurvey = await _eSurveyRepo.GetExitSurvey(Id);
+            var student_ssId = ssId.Substring(3,9);
+            Console.WriteLine("student_ssId: "+student_ssId);
+            var eSurvey = await _eSurveyRepo.GetExitSurvey(student_ssId);
             return Ok(eSurvey);
         }
 
