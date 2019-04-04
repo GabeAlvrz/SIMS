@@ -82,11 +82,6 @@ export class ExitsurveysComponent implements OnInit {
             colCount: 4,
             choices: ['B.A.', 'B.S.', 'M.S.', 'Ph.D.'],
             isRequired: true,
-            validators: [
-              {
-                type: 'numeric'
-              }
-            ]
           },
           {
             type: 'dropdown',
