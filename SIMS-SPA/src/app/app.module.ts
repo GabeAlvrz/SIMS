@@ -40,6 +40,7 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { AgGridModule } from '../../node_modules/ag-grid-angular';
 import { ExitsurveysviewComponent } from './exitsurveysview/exitsurveysview.component';
 import { GradseniorsurveysviewComponent } from './gradseniorsurveysview/gradseniorsurveysview.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -82,6 +83,7 @@ export function tokenGetter() {
       ModalModule.forRoot(),
       AgGridModule.withComponents(null),
       NgxGalleryModule,
+      FileUploadModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
