@@ -81,7 +81,7 @@ export class ExitsurveysComponent implements OnInit {
             type: 'radiogroup',
             colCount: 4,
             choices: ['B.A.', 'B.S.', 'M.S.', 'Ph.D.'],
-            isRequired: true,
+            isRequired: true,,
           },
           {
             type: 'dropdown',
