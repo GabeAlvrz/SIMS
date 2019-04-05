@@ -1,7 +1,15 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SIMS.API.Models;
 namespace SIMS.API.Data
 {
-    public class IThesisProjectRepository
+    public interface IThesisProjectRepository
     {
-        
+        void Add<T>(T entity) where T: class;
+        void Delete<T>(T entity) where T: class;
+
+        Task<ThesisProject> GetThesisProject(string studentName);
+        Task<IEnumerable<ThesisProject>> GetThesisProjects();
+        Task<bool> SaveAll();
     }
-}
+} 
