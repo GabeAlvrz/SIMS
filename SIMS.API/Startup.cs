@@ -90,7 +90,7 @@ namespace SIMS.API
             services.AddScoped<ISimsRepository, SimsRepository>();
             services.AddScoped<IExitSurveyRepository, ExitSurveyRepository>();
             services.AddScoped<IGradSeniorSurveyRepository, GradSeniorSurveyRepository>();
-            //services.AddScoped<IThesisProjectRepository, ThesisProjectRepository>();
+            services.AddScoped<IThesisProjectRepository, ThesisProjectRepository>();
             
         }
 
