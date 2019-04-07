@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SIMS.API.Helpers;
 using SIMS.API.Models;
@@ -11,9 +12,13 @@ namespace SIMS.API.Data
     public class SimsRepository : ISimsRepository
     {
         private readonly DataContext context;
-        public SimsRepository(DataContext context)
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager; 
+        public SimsRepository(DataContext context, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             this.context = context;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
         public void Add<T>(T entity) where T : class
         {
@@ -36,31 +41,41 @@ namespace SIMS.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = this.context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastName).AsQueryable();
+            var users = this.context.Users.Include(p => p.Photos).AsQueryable();
+            var roles  = this.context.UserRoles.Include(r => r.Role).Where(r => r.Role.Name == userParams.Role);
 
-            users = users.Where(u => u.Id != userParams.UserId);
+            var usersToReturn = users.Where(a => roles.Any(c => c.UserId == a.Id) && a.Id != userParams.UserId);
 
-            //users = users.Where(u => u.Gender == userParams.Gender);
-
-            if (userParams.MinAge != 18 || userParams.MaxAge != 99) {
-                var minDob = DateTime.Today.AddYears(-userParams.MaxAge-1);
-                var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
-
-                users = users.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            if (!string.IsNullOrEmpty(userParams.SearchBy) && !string.IsNullOrEmpty(userParams.SearchByInput)) {
+                switch (userParams.SearchBy) {
+                    case "firstName":
+                        usersToReturn = usersToReturn.Where(u => u.FirstName.ToUpper().Contains(userParams.SearchByInput.ToUpper()));
+                        break;
+                    case "lastName":
+                        usersToReturn = usersToReturn.Where(u => u.LastName.ToUpper().Contains(userParams.SearchByInput.ToUpper()));
+                        break;
+                }
             }
 
+            
             if (!string.IsNullOrEmpty(userParams.OrderBy)) {
-                // switch(userParams.OrderBy) {
-                //     case "created":
-                //         users = users.OrderByDescending(u => u.Created);
-                //         break;
-                //     default:
-                //         users = users.OrderByDescending(u => u.LastActive);
-                //         break;
-                // }
+                switch (userParams.OrderBy) {
+                    case "Last Name: A-Z":
+                        usersToReturn = usersToReturn.OrderBy(u => u.LastName);
+                        break;
+                    case "Last Name: Z-A":
+                        usersToReturn = usersToReturn.OrderByDescending(u => u.LastName);
+                        break;
+                    case "First Name: A-Z":
+                        usersToReturn = usersToReturn.OrderBy(u => u.FirstName);
+                        break;
+                    case "First Name: Z-A":
+                        usersToReturn = usersToReturn.OrderByDescending(u => u.FirstName);
+                        break;
+                }
             }
 
-            return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+            return await PagedList<User>.CreateAsync(usersToReturn, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

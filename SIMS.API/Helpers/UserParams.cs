@@ -11,9 +11,12 @@ namespace SIMS.API.Helpers
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
         public int UserId { get; set; }
-        public string Gender { get; set; }
-        public int MinAge { get; set; } = 18;
-        public int MaxAge { get; set; } = 99;
+        public string Role { get; set; }
+        // public string Gender { get; set; }
+        // public int MinAge { get; set; } = 18;
+        // public int MaxAge { get; set; } = 99;
+        public string SearchBy { get; set; }
+        public string SearchByInput { get; set; }
         public string OrderBy { get; set; }
         
 

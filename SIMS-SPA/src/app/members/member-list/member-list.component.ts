@@ -13,7 +13,10 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 export class MemberListComponent implements OnInit {
   users: User[];
   // user: User = JSON.parse(localStorage.getItem('user'));
-  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  roleList = [{value: 'Student', display: 'Students'}, {value: 'Faculty', display: 'Faculty'}];
+  searchByOptions = [{value: 'firstName', display: 'First Name'}, {value: 'lastName', display: 'Last Name'}];
+  orderByOptions = [{value: 'Last Name: A-Z', display: 'Last Name: A-Z'}, {value: 'Last Name: Z-A', display: 'Last Name: Z-A'},
+                    {value: 'First Name: A-Z', display: 'First Name: A-Z'}, {value: 'First Name: Z-A', display: 'First Name: Z-A'}];
   userParams: any = {};
   pagination: Pagination;
 
@@ -26,10 +29,14 @@ export class MemberListComponent implements OnInit {
     });
 
     // this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
-    this.userParams.gender = 'male';
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 99;
-    this.userParams.orderBy = 'lastActive';
+    // this.userParams.gender = 'male';
+    // this.userParams.minAge = 18;
+    // this.userParams.maxAge = 99;
+    // this.userParams.orderBy = 'lastActive';
+    this.userParams.role = 'Student';
+    this.userParams.searchBy = '';
+    this.userParams.searchByInput = '';
+    this.userParams.orderBy = '';
   }
 
   pageChanged(event: any): void {
@@ -37,12 +44,21 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
-  resetFilters() {
+  // resetFilters() {
+    // before
     // this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
-    this.userParams.gender = 'male';
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 99;
-    this.loadUsers();
+    // this.userParams.gender = 'male';
+    // this.userParams.minAge = 18;
+    // this.userParams.maxAge = 99;
+    // after
+    // this.userParams.role = 'Student';
+    // this.loadUsers();
+  // }
+
+  handleInput(event: KeyboardEvent) {
+    if (this.userParams.searchBy !== '') {
+      this.loadUsers();
+    }
   }
 
   loadUsers() {

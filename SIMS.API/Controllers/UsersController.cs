@@ -35,9 +35,9 @@ namespace SIMS.API.Controllers
             var userFromRepo = await this.repo.GetUser(currentUserId);
             userParams.UserId = currentUserId;
 
-            if (string.IsNullOrEmpty(userParams.Gender))
+            if (string.IsNullOrEmpty(userParams.Role))
             {
-                //userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+                userParams.Role = "Student";
             }
 
             var users = await repo.GetUsers(userParams);
