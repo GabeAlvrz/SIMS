@@ -6,14 +6,15 @@ namespace SIMS.API.Dtos
 {
     public class UserForUpdateDto
     {
-        public string PhoneNumber2 { get; set; }
-        public string Street { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
         public string Country { get; set; }
+        public string PhoneNumber2 { get; set; }
         public string Notes { get; set; }
-        //public ICollection<Photo> Photos { get; set; }
-        // Bachelors
+        // Bachelor's Info
         public DateTime? BachelorsStartDate { get; set; }
         public string BachelorsMentor { get; set; }
         public string BachelorsProjectAdvisor { get; set; }
@@ -21,7 +22,7 @@ namespace SIMS.API.Dtos
         public string BachelorsProjectTitle { get; set; }
         public string BachelorsThesisTitle { get; set; }
         public DateTime? BachelorsGradDate { get; set; }
-        // Masters
+        // Master's Info
         public DateTime? MastersStartDate { get; set; }
         public string MastersFocus { get; set; }
         public string MastersProjectAdvisor { get; set; }
@@ -41,5 +42,6 @@ namespace SIMS.API.Dtos
         public DateTime? DissertationDefenseDate { get; set; }
         public string DissertationTitle { get; set; }
         public DateTime? DoctorateGradDate { get; set; }
+
     }
 }

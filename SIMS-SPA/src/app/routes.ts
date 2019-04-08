@@ -27,7 +27,7 @@ export const appRoutes: Routes = [
             { path : 'mainpage', component: MainpageComponent },
             { path : 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
             { path : 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
-            { path : 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver},
+            { path : 'member/edit/:id', component: MemberEditComponent, resolve: {user: MemberEditResolver},
                                     canDeactivate: [PreventUnsavedChanges]},
             { path : 'exitsurveys', component: ExitsurveysComponent },
             { path : 'gradseniorsurveys', component: GradseniorsurveysComponent },

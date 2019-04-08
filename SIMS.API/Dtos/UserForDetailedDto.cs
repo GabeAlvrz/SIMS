@@ -7,7 +7,7 @@ namespace SIMS.API.Dtos
     public class UserForDetailedDto
     {
         // original
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

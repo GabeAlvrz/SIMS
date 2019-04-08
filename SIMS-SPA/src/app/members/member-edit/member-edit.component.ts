@@ -5,6 +5,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-member-edit',
@@ -14,6 +16,10 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  faculty: User[];
+  userParams: any = {};
+  pagination: Pagination;
+  bsConfig: Partial<BsDatepickerConfig>;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.editForm.dirty) {
@@ -28,10 +34,21 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.userParams.role = 'Faculty';
+    this.loadFaculty();
+  }
+
+  loadFaculty() {
+    this.userService.getUsers(null, null, this.userParams).subscribe((res: PaginatedResult<User[]>) => {
+      this.faculty = res.result;
+      this.pagination = res.pagination;
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
   updateUser() {
-    this.userService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
+    this.userService.updateUser(this.user.userName, this.user).subscribe(next => {
       this.alertify.success('Profile updated successfully');
       this.editForm.reset(this.user);
     }, error => {

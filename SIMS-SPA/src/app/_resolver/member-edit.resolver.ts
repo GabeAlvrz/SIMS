@@ -15,7 +15,18 @@ export class MemberEditResolver implements Resolve<User> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
-        return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
+        // const roles = [];
+        // roles.push('Admin');
+
+        // let id = '';
+
+        // if (this.authService.roleMatch(roles)) {
+        //     id = route.params['id'];
+        // } else {
+        //     id = this.authService.decodedToken.nameid;
+        // }
+
+        return this.userService.getUser(route.params['id']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving your data');
                 this.router.navigate(['/members']);

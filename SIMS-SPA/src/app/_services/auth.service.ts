@@ -23,7 +23,7 @@ export class AuthService {
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', JSON.stringify(user.user));
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          //console.log(this.decodedToken);
+          // console.log(this.decodedToken);
         }
       })
     );
