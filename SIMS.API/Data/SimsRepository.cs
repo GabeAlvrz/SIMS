@@ -13,7 +13,7 @@ namespace SIMS.API.Data
     {
         private readonly DataContext context;
         private readonly UserManager<User> userManager;
-        private readonly RoleManager<Role> roleManager; 
+        private readonly RoleManager<Role> roleManager;
         public SimsRepository(DataContext context, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             this.context = context;
@@ -32,22 +32,22 @@ namespace SIMS.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await this.context.Users.Include(c => c.MastersCommittee)
-                                               .Include(a => a.DoctorateCommittee)
-                                               .Include(p => p.Photos)
-                                               .FirstOrDefaultAsync(u => u.Id == id);     
+            var user = await this.context.Users.Include(p => p.Photos)
+                                               .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = this.context.Users.Include(p => p.Photos).AsQueryable();
-            var roles  = this.context.UserRoles.Include(r => r.Role).Where(r => r.Role.Name == userParams.Role);
+            var roles = this.context.UserRoles.Include(r => r.Role).Where(r => r.Role.Name == userParams.Role);
 
             var usersToReturn = users.Where(a => roles.Any(c => c.UserId == a.Id) && a.Id != userParams.UserId);
 
-            if (!string.IsNullOrEmpty(userParams.SearchBy) && !string.IsNullOrEmpty(userParams.SearchByInput)) {
-                switch (userParams.SearchBy) {
+            if (!string.IsNullOrEmpty(userParams.SearchBy) && !string.IsNullOrEmpty(userParams.SearchByInput))
+            {
+                switch (userParams.SearchBy)
+                {
                     case "firstName":
                         usersToReturn = usersToReturn.Where(u => u.FirstName.ToUpper().Contains(userParams.SearchByInput.ToUpper()));
                         break;
@@ -57,9 +57,11 @@ namespace SIMS.API.Data
                 }
             }
 
-            
-            if (!string.IsNullOrEmpty(userParams.OrderBy)) {
-                switch (userParams.OrderBy) {
+
+            if (!string.IsNullOrEmpty(userParams.OrderBy))
+            {
+                switch (userParams.OrderBy)
+                {
                     case "Last Name: A-Z":
                         usersToReturn = usersToReturn.OrderBy(u => u.LastName);
                         break;

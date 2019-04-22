@@ -315,11 +315,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="mastersCommitteeMember1">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="mastersCommMember1">Comm. Member
                     1</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="mastersCommitteeMember1"
-                  name="mastersCommitteeMember1">
+                <select class="custom-select" style="width: 160px" id="mastersCommMember1"
+                  [(ngModel)]="user.mastersCommMember1" name="mastersCommMember1">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -327,11 +327,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="mastersCommitteeMember2">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="mastersCommMember2">Comm. Member
                     2</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="mastersCommitteeMember2"
-                  name="mastersCommitteeMember2">
+                <select class="custom-select" style="width: 160px" id="mastersCommMember2"
+                [(ngModel)]="user.mastersCommMember2" name="mastersCommMember2">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -339,11 +339,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="mastersCommitteeMember3">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="mastersCommMember3">Comm. Member
                     3</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="mastersCommitteeMember3"
-                  name="mastersCommitteeMember3">
+                <select class="custom-select" style="width: 160px" id="mastersCommMember3"
+                [(ngModel)]="user.mastersCommMember3" name="mastersCommMember3">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -351,11 +351,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 150px" name="mastersCommitteeMember4">Comm. Member
+                  <span class="input-group-text" style="width: 150px" name="mastersCommMember4">Comm. Member
                     4</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="mastersCommitteeMember4"
-                  name="mastersCommitteeMember4">
+                <select class="custom-select" style="width: 160px" id="mastersCommMember4"
+                [(ngModel)]="user.mastersCommMember4" name="mastersCommMember4">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -363,15 +363,22 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 150px" name="mastersCommitteeMember5">Comm. Member
+                  <span class="input-group-text" style="width: 150px" name="mastersCommMember5">Comm. Member
                     5</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="mastersCommitteeMember5"
-                  name="mastersCommitteeMember5">
+                <select class="custom-select" style="width: 160px" id="mastersCommMember5"
+                [(ngModel)]="user.mastersCommMember5" name="mastersCommMember5">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
                 </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="width: 140px" name="mastersCommFormDate">Comm. Form Date</span>
+                </div>
+                <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control" name="mastersCommFormDate"
+                  [(ngModel)]="user.mastersCommFormDate">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -464,11 +471,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="doctorateCommitteeMember1">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember1">Comm. Member
                     1</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember1"
-                  name="doctorateCommitteeMember1">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember1"
+                  [(ngModel)]="user.doctorateCommMember1" name="doctorateCommMember1">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -476,11 +483,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="doctorateCommitteeMember2">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember2">Comm. Member
                     2</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember2"
-                  name="doctorateCommitteeMember2">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember2"
+                  [(ngModel)]="user.doctorateCommMember2" name="doctorateCommMember2">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -488,11 +495,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 145px" name="doctorateCommitteeMember3">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember3">Comm. Member
                     3</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember3"
-                  name="doctorateCommitteeMember3">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember3"
+                  [(ngModel)]="user.doctorateCommMember3" name="doctorateCommMember3">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -500,11 +507,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 150px" name="doctorateCommitteeMember4">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember4">Comm. Member
                     4</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember4"
-                  name="doctorateCommitteeMember4">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember4"
+                  [(ngModel)]="user.doctorateCommMember4" name="doctorateCommMember4">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -512,11 +519,11 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 150px" name="doctorateCommitteeMember5">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember5">Comm. Member
                     5</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember5"
-                  name="doctorateCommitteeMember5">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember5"
+                  [(ngModel)]="user.doctorateCommMember5" name="doctorateCommMember5">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
@@ -524,15 +531,22 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" style="width: 150px" name="doctorateCommitteeMember6">Comm. Member
+                  <span class="input-group-text" style="width: 145px" name="doctorateCommMember6">Comm. Member
                     6</span>
                 </div>
-                <select class="custom-select" style="width: 160px" id="doctorateCommitteeMember6"
-                  name="doctorateCommitteeMember6">
+                <select class="custom-select" style="width: 160px" id="doctorateCommMember6"
+                  [(ngModel)]="user.doctorateCommMember6" name="doctorateCommMember6">
                   <option *ngFor="let mentor of faculty" [value]="mentor.fullName">
                     {{mentor.fullName}}
                   </option>
                 </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="width: 140px" name="doctorateCommFormDate">Comm. Form Date</span>
+                </div>
+                <input type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control"
+                  name="doctorateCommFormDate" [(ngModel)]="user.doctorateCommFormDate">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">

@@ -14,6 +14,7 @@ using SIMS.API.Properties;
 using System.IO;
 using System.Data;
 using System.Data.Odbc;
+using Microsoft.AspNetCore.Identity;
 
 namespace SIMS.API.Controllers
 {
@@ -24,11 +25,13 @@ namespace SIMS.API.Controllers
     {
         private readonly IThesisProjectRepository _thesisRepo;
         private readonly IMapper _mapper;
+        private readonly DataContext context;
 
-        public ThesisProjectsController(IThesisProjectRepository thesisRepo ,IMapper mapper)
+        public ThesisProjectsController(IThesisProjectRepository thesisRepo ,IMapper mapper, DataContext context)
         {
             _thesisRepo = thesisRepo;
             _mapper = mapper;
+            this.context = context;
         }
 
         [AllowAnonymous]

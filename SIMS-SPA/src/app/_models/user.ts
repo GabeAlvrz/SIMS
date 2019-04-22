@@ -34,7 +34,12 @@ export interface User {
     mastersFocus: string;
     mastersProjectAdvisor: string;
     mastersThesisAdvisor: string;
-    mastersCommittee?: Committee;
+    mastersCommMember1: string;
+    mastersCommMember2: string;
+    mastersCommMember3: string;
+    mastersCommMember4: string;
+    mastersCommMember5: string;
+    mastersCommFormDate: Date;
     mastersDefenseDate: Date;
     mastersProjectTitle: string;
     mastersThesisTitle: string;
@@ -45,7 +50,13 @@ export interface User {
     dateAcceptedForCandidacy: Date;
     doctorateAdvisor: string;
     externalAdvisor: string;
-    doctorateCommittee?: Committee;
+    doctorateCommMember1: string;
+    doctorateCommMember2: string;
+    doctorateCommMember3: string;
+    doctorateCommMember4: string;
+    doctorateCommMember5: string;
+    doctorateCommMember6: string;
+    doctorateCommFormDate: Date;
     dissertationDefenseDate: Date;
     dissertationTitle: string;
     doctorateGradDate: Date;

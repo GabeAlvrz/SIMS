@@ -42,7 +42,12 @@ namespace SIMS.API.Dtos
         public string MastersFocus { get; set; }
         public string MastersProjectAdvisor { get; set; }
         public string MastersThesisAdvisor { get; set; }
-        public CommitteeDto MastersCommittee { get; set; }
+        public string MastersCommMember1 { get; set; }
+        public string MastersCommMember2 { get; set; }
+        public string MastersCommMember3 { get; set; }
+        public string MastersCommMember4 { get; set; }
+        public string MastersCommMember5 { get; set; }
+        public string MastersCommFormDate { get; set; }
         public string MastersDefenseDate { get; set; }
         public string MastersProjectTitle { get; set; }
         public string MastersThesisTitle { get; set; }
@@ -54,7 +59,13 @@ namespace SIMS.API.Dtos
         public string DateAcceptedForCandidacy { get; set; }
         public string DoctorateAdvisor { get; set; }
         public string ExternalAdvisor { get; set; }
-        public CommitteeDto DoctorateCommittee { get; set; }
+        public string DoctorateCommMember1 { get; set; }
+        public string DoctorateCommMember2 { get; set; }
+        public string DoctorateCommMember3 { get; set; }
+        public string DoctorateCommMember4 { get; set; }
+        public string DoctorateCommMember5 { get; set; }
+        public string DoctorateCommMember6 { get; set; }
+        public string DoctorateCommFormDate { get; set; }
         public string DissertationDefenseDate { get; set; }
         public string DissertationTitle { get; set; }
         public string DoctorateGradDate { get; set; }
