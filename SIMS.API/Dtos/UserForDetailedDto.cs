@@ -69,5 +69,13 @@ namespace SIMS.API.Dtos
         public string DissertationDefenseDate { get; set; }
         public string DissertationTitle { get; set; }
         public string DoctorateGradDate { get; set; }
+
+        // faculty info
+        public string Office { get; set; }
+        public string ResearchInterest { get; set; }
+        public string Degree { get; set; }
+        public string Designation { get; set; }
+        public string Current { get; set; }
+        public string Title { get; set; }
     }
 }

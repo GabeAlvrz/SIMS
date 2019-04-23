@@ -55,10 +55,10 @@ namespace SIMS.API.Controllers
             return Ok(userToReturn);
         }
 
-        [HttpPut("{userName}")]
-        public async Task<IActionResult> updateUser(string userName, UserForUpdateDto userForUpdateDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> updateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            var user = await this.userManager.FindByNameAsync(userName);
+            var user = await this.repo.GetUser(id);
             this.mapper.Map(userForUpdateDto, user);
 
             if (await this.repo.SaveAll())
@@ -66,7 +66,7 @@ namespace SIMS.API.Controllers
                 return NoContent();
             }
 
-            throw new Exception($"Updating user {userName} failed on save");
+            throw new Exception($"Updating user {id} failed on save");
 
         }
 

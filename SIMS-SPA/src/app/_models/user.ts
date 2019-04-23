@@ -60,6 +60,14 @@ export interface User {
     dissertationDefenseDate: Date;
     dissertationTitle: string;
     doctorateGradDate: Date;
+    // faculty info
+    office: string;
+    researchInterest: string;
+    degree: string;
+    designation: string;
+    current: string;
+    title: string;
+
     photoUrl: string;
     photos?: Photo[];
     roles?: string[];

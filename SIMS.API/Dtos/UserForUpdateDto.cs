@@ -6,6 +6,7 @@ namespace SIMS.API.Dtos
 {
     public class UserForUpdateDto
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -55,5 +56,12 @@ namespace SIMS.API.Dtos
         public string DissertationTitle { get; set; }
         public DateTime? DoctorateGradDate { get; set; }
 
+        // faculty
+        public string Office { get; set; }
+        public string ResearchInterest { get; set; }
+        public string Degree { get; set; }
+        public string Designation { get; set; }
+        public string Current { get; set; }
+        public string Title { get; set; }
     }
 }

@@ -48,7 +48,7 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateUser() {
-    this.userService.updateUser(this.user.userName, this.user).subscribe(next => {
+    this.userService.updateUser(this.user.id, this.user).subscribe(next => {
       this.alertify.success('Profile updated successfully');
       this.editForm.reset(this.user);
     }, error => {

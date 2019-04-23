@@ -70,5 +70,15 @@ namespace SIMS.API.Models
         public string DissertationTitle { get; set; }
         public DateTime DoctorateGradDate { get; set; }
 
+        // faculty info
+        public string Office { get; set; }
+        public string ResearchInterest { get; set; }
+        public string Degree { get; set; }
+        public string Designation { get; set; }
+        public string Current { get; set; }
+        public string Title { get; set; }
+
+        
+
     }
 }
