@@ -60,6 +60,12 @@ namespace SIMS.API.Helpers
             }).ForMember(dest => dest.DoctorateGradDate, opt =>
             {
                 opt.MapFrom(src => src.DoctorateGradDate.ToShortDateString());
+            }).ForMember(dest => dest.Roles, opt => 
+            {
+                opt.MapFrom(src => src.UserRoles.ToList().Select(ur => ur.Role).Select(rn => rn.Name).ToArray());
+            }).ForMember(dest => dest.PhotoUrl, opt => 
+            {
+                opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
             });
             // CreateMap<UserForRegisterDto, User>().ForMember(dest => dest.BachelorsMentor, opt => {
             //     opt.MapFrom(src => src.BachelorsMentor);

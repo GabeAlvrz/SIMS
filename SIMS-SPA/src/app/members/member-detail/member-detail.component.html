@@ -31,9 +31,17 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="About {{ user.firstName }}">
-            <h6>Student's Status:</h6>
-            <p>{{user.currentAcademicLevel}}</p>
-            <h6>Student ID:</h6>
+            <div *ngIf="user.roles.includes('Faculty')">
+                <h6>Current:</h6>
+                <p>{{user.current}}</p>
+                <h6>Title:</h6>
+                <p>{{user.title}}</p>
+            </div>
+            <div *ngIf="user.roles.includes('Student')">
+                <h6>Student's Status:</h6>
+                <p>{{user.currentAcademicLevel}}</p>
+            </div>
+            <h6>ID:</h6>
             <p>{{user.userName}}</p>
             <h6>First Name:</h6>
             <p>{{user.firstName}}</p>
@@ -41,22 +49,36 @@
             <p>{{user.middleName}}</p>
             <h6>Last Name:</h6>
             <p>{{user.lastName}}</p>
-            <h6>CS Degree Program:</h6>
-            <p>{{user.degreeProgram}}</p>
-            <h6>Current Program:</h6>
-            <p>{{user.currentProgram}}</p>
-            <h6>Current Academic Level:</h6>
-            <p>{{user.currentAcademicLevel}}</p>
+            <div *ngIf="user.roles.includes('Student')">
+                <h6>CS Degree Program:</h6>
+                <p>{{user.degreeProgram}}</p>
+                <h6>Current Program:</h6>
+                <p>{{user.currentProgram}}</p>
+                <h6>Current Academic Level:</h6>
+                <p>{{user.currentAcademicLevel}}</p>
+            </div>
+            <div *ngIf="user.roles.includes('Faculty')">
+                <h6>Degree:</h6>
+                <p>{{user.degree}}</p>
+                <h6>Office:</h6>
+                <p>{{user.office}}</p>
+                <h6>Designation:</h6>
+                <p>{{user.designation}}</p>
+                <h6>Interests:</h6>
+                <p>{{user.researchInterest}}</p>
+            </div>
             <h6>Email:</h6>
             <p>{{user.email}}</p>
             <h6>Phone Number 1:</h6>
             <p>{{user.phoneNumber}}</p>
             <h6>Phone Number 2:</h6>
             <p>{{user.phoneNumber2}}</p>
-            <h6>Notes:</h6>
-            <p>{{user.notes}}</p>
+            <div *ngIf="user.roles.includes('Student')">
+                <h6>Notes:</h6>
+                <p>{{user.notes}}</p>
+            </div>
           </tab>
-          <tab heading="Bachelor's Details">
+          <tab *ngIf="user.roles.includes('Student')" heading="Bachelor's Details">
             <h6>Start Date:</h6>
             <p>{{user.bachelorsStartDate}}</p>
             <h6>Faculty Mentor:</h6>
@@ -72,7 +94,7 @@
             <h6>BA/BS Graduation Date:</h6>
             <p>{{user.bachelorsGradDate}}</p>
           </tab>
-          <tab heading="Master's Details">
+          <tab *ngIf="user.roles.includes('Student')" heading="Master's Details">
             <h6>Master's Focus:</h6>
             <p>{{user.mastersFocus}}</p>
             <h6>Start Date:</h6>
@@ -102,7 +124,7 @@
             <h6>Master's Graduation Date:</h6>
             <p>{{user.mastersGradDate}}</p>
           </tab>
-          <tab heading="PhD Details">
+          <tab *ngIf="user.roles.includes('Student')" heading="PhD Details">
             <h6>Doctoral Candidate:</h6>
             <p>{{user.doctoralCandidate}}</p>
             <h6>Start Date:</h6>
@@ -134,7 +156,7 @@
             <h6>PhD Graduation Date:</h6>
             <p>{{user.doctorateGradDate}}</p>
           </tab>
-          <tab heading="Photos">
+          <tab *ngIf="user.roles.includes('Student')" heading="Photos">
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </tab>
         </tabset>

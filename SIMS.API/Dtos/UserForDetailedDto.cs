@@ -12,7 +12,7 @@ namespace SIMS.API.Dtos
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public string FullName { get { return LastName + ", " + FirstName;} }
+        public string FullName { get { return LastName + ", " + FirstName; } }
         public string DateOfBirth { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
@@ -26,7 +26,9 @@ namespace SIMS.API.Dtos
         public string CurrentProgram { get; set; }
         public string Notes { get; set; }
         public string PhotoUrl { get; set; }
-        public ICollection<PhotosForDetailedDto> Photos { get; set; }        
+        public ICollection<PhotosForDetailedDto> Photos { get; set; }
+        public string[] Roles { get; set; }
+
 
         // Bachelors Info
         public string BachelorsStartDate { get; set; }

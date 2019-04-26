@@ -32,10 +32,11 @@ namespace SIMS.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await this.context.Users.Include(p => p.Photos)
-                                               .FirstOrDefaultAsync(u => u.Id == id);
+            var user = await this.context.Users.Include(p => p.Photos).Include(ur => ur.UserRoles).ThenInclude(r => r.Role)
+                                              .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
+
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
