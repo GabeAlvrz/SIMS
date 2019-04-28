@@ -47,13 +47,63 @@ namespace SIMS.API.Data
 
             if (!string.IsNullOrEmpty(userParams.SearchBy) && !string.IsNullOrEmpty(userParams.SearchByInput))
             {
+                var input = userParams.SearchByInput.ToUpper();
+
                 switch (userParams.SearchBy)
                 {
+                    case "dawgTag":
+                        usersToReturn = usersToReturn.Where(u => u.NormalizedUserName.Contains(input));
+                        break;
                     case "firstName":
-                        usersToReturn = usersToReturn.Where(u => u.FirstName.ToUpper().Contains(userParams.SearchByInput.ToUpper()));
+                        usersToReturn = usersToReturn.Where(u => u.FirstName.ToUpper().Contains(input));
                         break;
                     case "lastName":
-                        usersToReturn = usersToReturn.Where(u => u.LastName.ToUpper().Contains(userParams.SearchByInput.ToUpper()));
+                        usersToReturn = usersToReturn.Where(u => u.LastName.ToUpper().Contains(input));
+                        break;
+                    case "currentAcademicLevel":
+                        usersToReturn = usersToReturn.Where(u => u.CurrentAcademicLevel.ToUpper().Contains(input));
+                        break;
+                    case "degreeProgram":
+                        usersToReturn = usersToReturn.Where(u => u.DegreeProgram.ToUpper().Contains(input));
+                        break;
+                    case "currentProgram":
+                        usersToReturn = usersToReturn.Where(u => u.CurrentProgram.ToUpper().Contains(input));
+                        break;
+                    case "interests":
+                        usersToReturn = usersToReturn.Where(u => u.ResearchInterest.ToUpper().Contains(input));
+                        break;
+                    case "bachMentor":
+                        usersToReturn = usersToReturn.Where(u => u.BachelorsMentor.ToUpper().Contains(input));
+                        break;
+                    case "bachProjectAdvisor":
+                        usersToReturn = usersToReturn.Where(u => u.BachelorsProjectAdvisor.ToUpper().Contains(input));
+                        break;
+                    case "bachThesisAdvisor":
+                        usersToReturn = usersToReturn.Where(u => u.BachelorsThesisAdvisor.ToUpper().Contains(input));
+                        break;
+                    case "bachProjectTitle":
+                        usersToReturn = usersToReturn.Where(u => u.BachelorsProjectTitle.ToUpper().Contains(input));
+                        break;
+                    case "bachThesisTitle":
+                        usersToReturn = usersToReturn.Where(u => u.BachelorsThesisTitle.ToUpper().Contains(input));
+                        break;
+                    case "mastersProjectAdvisor":
+                        usersToReturn = usersToReturn.Where(u => u.MastersProjectAdvisor.ToUpper().Contains(input));
+                        break;
+                    case "mastersThesisAdvisor":
+                        usersToReturn = usersToReturn.Where(u => u.MastersThesisAdvisor.ToUpper().Contains(input));
+                        break;
+                    case "mastersProjectTitle":
+                        usersToReturn = usersToReturn.Where(u => u.MastersProjectTitle.ToUpper().Contains(input));
+                        break;
+                    case "mastersThesisTitle":
+                        usersToReturn = usersToReturn.Where(u => u.MastersThesisTitle.ToUpper().Contains(input));
+                        break;
+                    case "doctorateAdvisor":
+                        usersToReturn = usersToReturn.Where(u => u.DoctorateAdvisor.ToUpper().Contains(input));
+                        break;
+                    case "designation":
+                        usersToReturn = usersToReturn.Where(u => u.Designation.ToUpper().Contains(input));
                         break;
                 }
             }

@@ -16,10 +16,17 @@
           Faculty
         </button>
       </div>
-      <select class="custom-select" style="width: 120px" id="searchOption" [(ngModel)]="userParams.searchBy" name="searchOption"
+      <select *ngIf="userParams.role == 'Student'" class="custom-select" style="width: 120px" id="searchOption" [(ngModel)]="userParams.searchBy" name="searchOption"
         (change)="loadUsers()">
         <option value="" disabled selected>Search By</option>
-        <option *ngFor="let option of searchByOptions" [value]="option.value">
+        <option *ngFor="let option of studentSearchOptions" [value]="option.value">
+          {{ option.display }}
+        </option>
+      </select>
+      <select *ngIf="userParams.role == 'Faculty'" class="custom-select" style="width: 120px" id="searchOption" [(ngModel)]="userParams.searchBy" name="searchOption"
+        (change)="loadUsers()">
+        <option value="" disabled selected>Search By</option>
+        <option *ngFor="let option of facultySearchOptions" [value]="option.value">
           {{ option.display }}
         </option>
       </select>
