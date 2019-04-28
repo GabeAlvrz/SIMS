@@ -59,7 +59,15 @@ namespace SIMS.API.Controllers
         public async Task<IActionResult> updateUser(int id, UserForUpdateDto userForUpdateDto)
         {
             var user = await this.repo.GetUser(id);
-            this.mapper.Map(userForUpdateDto, user);
+
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) {
+                if (!await this.userManager.IsInRoleAsync(user, "Admin") || !await this.userManager.IsInRoleAsync(user, "Staff")) {
+                    return Unauthorized();
+                }
+            }
+            
+            var userToUpdate = await this.repo.GetUser(userForUpdateDto.Id);
+            this.mapper.Map(userForUpdateDto, userToUpdate);
 
             if (await this.repo.SaveAll())
             {
